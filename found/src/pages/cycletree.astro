@@ -1,0 +1,355 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="CycleTree">
+    <main class="container">
+        <h1>CycleTree</h1>
+        
+        <section class="intro">
+            <p class="lead">
+                CycleTreeはfactoryプロジェクトの研究母体組織である。
+                AIエージェントによる作業自動化システムの研究・開発を行う。
+            </p>
+        </section>
+
+        <h2>ミッション</h2>
+        <blockquote>
+            「自分がボトルネックにならないシステム」を作る。
+            人間の作業を意思決定のみにし、それ以外はAIエージェントに委譲する。
+        </blockquote>
+
+        <h2>組織図</h2>
+        <div class="org-chart">
+            <img src="/images/org-chart.png" alt="CycleTree 組織図" />
+        </div>
+        <p class="caption">
+            CycleTree の組織構造と外部連携。
+            mtdnot を頂点に、anagi が中間管理として各部門（ANAG, Refixa, Personal）を統括。
+            外部組織として Frexida（連携）と Seirin-Company（受託）が接続。
+        </p>
+
+        <h2>組織間関係</h2>
+        <div class="relation-map">
+            <div class="relation-item">
+                <strong>CycleTree</strong> → factoryの研究母体
+            </div>
+            <div class="relation-item">
+                <strong>ANAG</strong> → 学術部門（eps研究、論文化）
+            </div>
+            <div class="relation-item">
+                <strong>Refixa</strong> → 実践・工学部門（factory運用、自動化基盤）
+            </div>
+            <div class="relation-item">
+                <strong>Personal</strong> → 影武者（natsu）、人間的な仕事の代行
+            </div>
+        </div>
+
+        <h3>外部連携</h3>
+        <div class="relation-map">
+            <div class="relation-item external">
+                <strong>Frexida</strong> → ビジネス連携（OSS、共同開発）
+            </div>
+            <div class="relation-item external">
+                <strong>Seirin-Company</strong> → 受託業務
+            </div>
+        </div>
+
+        <h2>エージェント配置</h2>
+        <table class="agent-table">
+            <thead>
+                <tr>
+                    <th>エージェントID</th>
+                    <th>担当組織</th>
+                    <th>主要チャンネル</th>
+                    <th>役割</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>anagi</code></td>
+                    <td>CycleTree</td>
+                    <td>Discord #z_natsu, #rc-coffee</td>
+                    <td>中間管理、全体調整</td>
+                </tr>
+                <tr>
+                    <td><code>angis</code></td>
+                    <td>ANAG</td>
+                    <td>Slack #eps, Discord #angis</td>
+                    <td>eps研究、電離圏解析</td>
+                </tr>
+                <tr>
+                    <td><code>fixus</code></td>
+                    <td>Refixa</td>
+                    <td>Slack #factory, Discord #fixus</td>
+                    <td>自動化基盤、factory運用</td>
+                </tr>
+                <tr>
+                    <td><code>natsu</code></td>
+                    <td>Personal</td>
+                    <td>Discord #rc-coffee</td>
+                    <td>mtdnotの影武者、人間的タスク</td>
+                </tr>
+                <tr>
+                    <td><code>leith18</code></td>
+                    <td>CycleTree</td>
+                    <td>Discord #rc-coffee</td>
+                    <td>インフラ、システム管理</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>技術スタック</h2>
+        <div class="tech-stack">
+            <div class="tech-category">
+                <h3>思考装置</h3>
+                <ul>
+                    <li>Claude Code</li>
+                    <li>Playwright MCP</li>
+                    <li>OpenClaw</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>輸送/管理装置</h3>
+                <ul>
+                    <li>n8n（ワークフロー自動化）</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>実装装置</h3>
+                <ul>
+                    <li>Claude Code（仕様書→実装）</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>通信</h3>
+                <ul>
+                    <li>Slack（機密情報）</li>
+                    <li>Discord（公開情報）</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>コミュニケーションチャンネル</h2>
+        <table class="channel-table">
+            <thead>
+                <tr>
+                    <th>プラットフォーム</th>
+                    <th>チャンネル</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Slack</td>
+                    <td>#eps</td>
+                    <td>電離圏研究、angis担当（機密）</td>
+                </tr>
+                <tr>
+                    <td>Slack</td>
+                    <td>#factory</td>
+                    <td>自動化基盤、fixus担当（機密）</td>
+                </tr>
+                <tr>
+                    <td>Discord</td>
+                    <td>#rc-coffee</td>
+                    <td>全体調整、方針決定</td>
+                </tr>
+                <tr>
+                    <td>Discord</td>
+                    <td>#z_natsu</td>
+                    <td>mtdnot + anagi 作業チャンネル</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>意思決定フロー</h2>
+        <ol class="decision-flow">
+            <li>エージェントが提案・実装</li>
+            <li>anagi が調整・集約</li>
+            <li>mtdnot が最終承認</li>
+        </ol>
+        <p>
+            <strong>原則:</strong> エージェントは自律的に作業し、哲学的・根源的な判断のみ mtdnot に委ねる。
+        </p>
+
+        <h2>リポジトリ構造</h2>
+        <table class="repo-table">
+            <thead>
+                <tr>
+                    <th>リポジトリ</th>
+                    <th>組織</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>CycleTree/foundation</code></td>
+                    <td>CycleTree</td>
+                    <td>このサイト（組織情報）</td>
+                </tr>
+                <tr>
+                    <td><code>CycleTree/eps</code></td>
+                    <td>ANAG</td>
+                    <td>電離圏研究</td>
+                </tr>
+                <tr>
+                    <td><code>CycleTree/factory</code></td>
+                    <td>Refixa</td>
+                    <td>自動化基盤</td>
+                </tr>
+                <tr>
+                    <td><code>mtdnot/icall</code></td>
+                    <td>Refixa</td>
+                    <td>AI電話システム (@refixa/icall)</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</Base>
+
+<style>
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-top: 40px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+    }
+
+    h3 {
+        font-size: 14px;
+        margin-bottom: 8px;
+        margin-top: 24px;
+        color: var(--text-muted);
+    }
+
+    .intro {
+        margin-bottom: 32px;
+    }
+
+    .lead {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    blockquote {
+        background: var(--bg-darker);
+        border-left: 3px solid var(--accent, #4a9);
+        padding: 20px 24px;
+        margin: 24px 0;
+        font-style: italic;
+    }
+
+    .org-chart {
+        margin: 24px 0;
+        text-align: center;
+    }
+
+    .org-chart img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+    }
+
+    .caption {
+        font-size: 14px;
+        color: var(--text-muted);
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    .relation-map {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 16px 0;
+    }
+
+    .relation-item {
+        padding: 12px 16px;
+        background: var(--bg-darker);
+        border-left: 3px solid var(--border);
+    }
+
+    .relation-item.external {
+        border-left-color: var(--accent, #4a9);
+        border-left-style: dashed;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    th, td {
+        padding: 12px 16px;
+        text-align: left;
+        border: 1px solid var(--border);
+    }
+
+    th {
+        background: var(--bg-darker);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    code {
+        font-family: 'IBM Plex Mono', monospace;
+        background: var(--bg-light);
+        padding: 2px 6px;
+        font-size: 13px;
+        border-radius: 3px;
+    }
+
+    .tech-stack {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin: 16px 0;
+    }
+
+    .tech-category {
+        padding: 16px;
+        background: var(--bg-darker);
+        border: 1px solid var(--border);
+    }
+
+    .tech-category ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .tech-category li {
+        margin: 4px 0;
+    }
+
+    .decision-flow {
+        padding-left: 24px;
+    }
+
+    .decision-flow li {
+        margin: 8px 0;
+    }
+
+    @media (max-width: 768px) {
+        .tech-stack {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

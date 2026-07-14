@@ -1,0 +1,129 @@
+direction: down
+
+# 外部連携組織
+Frexida: {
+  label: "Frexida"
+  style: {
+    fill: "#3498db"
+    stroke: "#2980b9"
+    stroke-width: 2
+    stroke-dash: 4
+    font-color: "#ffffff"
+  }
+}
+
+Seirin-Company: {
+  label: "Seirin-Company"
+  style: {
+    fill: "#f39c12"
+    stroke: "#d68910"
+    stroke-width: 2
+    stroke-dash: 4
+    font-color: "#ffffff"
+  }
+}
+
+mtdnot: {
+  label: "mtdnot"
+  style: {
+    fill: "#2c3e50"
+    stroke: "#1a252f"
+    stroke-width: 2
+    font-color: "#ffffff"
+    bold: true
+  }
+}
+
+CycleTree: {
+  label: "CycleTree"
+  style: {
+    fill: "#f8f9fa"
+    stroke: "#6c757d"
+    stroke-width: 2
+  }
+  
+  anagi: {
+    label: "anagi"
+    style: {
+      fill: "#ecf0f1"
+      stroke: "#bdc3c7"
+      stroke-width: 2
+      font-color: "#2c3e50"
+    }
+  }
+  
+  ANAG: {
+    label: "ANAG"
+    style: {
+      fill: "#fadbd8"
+      stroke: "#e74c3c"
+      stroke-width: 2
+    }
+    angis: {
+      label: "angis"
+      style: {
+        fill: "#e74c3c"
+        font-color: "#ffffff"
+      }
+    }
+  }
+  
+  Refixa: {
+    label: "Refixa"
+    style: {
+      fill: "#e8daef"
+      stroke: "#8e44ad"
+      stroke-width: 2
+    }
+    fixus: {
+      label: "fixus"
+      style: {
+        fill: "#8e44ad"
+        font-color: "#ffffff"
+      }
+    }
+  }
+  
+  Personal: {
+    label: "Personal"
+    style: {
+      fill: "#d4e6f1"
+      stroke: "#2980b9"
+      stroke-width: 2
+    }
+    natsu: {
+      label: "natsu"
+      style: {
+        fill: "#2980b9"
+        font-color: "#ffffff"
+      }
+    }
+  }
+}
+
+Frexida.near: top-right
+Seirin-Company.near: top-left
+
+mtdnot -> CycleTree.anagi: 指示 {
+  style.stroke: "#2c3e50"
+  style.stroke-width: 2
+}
+CycleTree.anagi -> CycleTree.ANAG.angis {
+  style.stroke: "#e74c3c"
+}
+CycleTree.anagi -> CycleTree.Refixa.fixus {
+  style.stroke: "#8e44ad"
+}
+CycleTree.anagi -> CycleTree.Personal.natsu {
+  style.stroke: "#2980b9"
+}
+
+# natsu と外部連携
+CycleTree.Personal.natsu <-> Frexida: 連携 {
+  style.stroke: "#3498db"
+  style.stroke-dash: 4
+}
+CycleTree.Personal.natsu <-> Seirin-Company: 受託 {
+  style.stroke: "#f39c12"
+  style.stroke-dash: 4
+}

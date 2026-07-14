@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="CycleTree">
+  <article>
+    <h1>CycleTree</h1>
+    
+    <p>
+      CycleTreeは、複数の組織とプロジェクトを束ねる研究母体です。
+    </p>
+    
+    <h2>Organizations</h2>
+    
+    <div class="org-list">
+      <a href="/anag" class="org-card">
+        <h3>ANAG</h3>
+        <p>研究・探究を担う組織。Anti-agingを語源とし、生命科学と基礎研究を行う。</p>
+      </a>
+      
+      <a href="/refixa" class="org-card">
+        <h3>Refixa (RF)</h3>
+        <p>実践・工学を担う組織。技術開発とビジネスを通じて力を得る。</p>
+      </a>
+      
+      <a href="/frexida" class="org-card">
+        <h3>Frexida</h3>
+        <p>ビジネスと成長を担う組織。エージェント化・自動化による効率化を推進。</p>
+      </a>
+    </div>
+    
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>EPS</strong> — Earthquake Prediction System / 地震予測システム（<a href="/anag-projects">詳細</a>）</li>
+      <li><strong>factory</strong> — 作業自動化基盤（<a href="/refixa-systems">詳細</a>）</li>
+      <li><strong>MAS</strong> — Multi Agent System / マルチエージェント基盤</li>
+      <li><strong>電離圏研究</strong> — 地震準備過程と電子密度遷移の研究</li>
+    </ul>
+    
+    <h2>エージェント向け情報</h2>
+    <p>
+      <a href="/cycletree">CycleTree組織概要</a> — エージェント配置、技術スタック、通信チャンネル、意思決定フローなど
+    </p>
+    
+    <h2>People</h2>
+    <ul>
+      <li><a href="/mtdnot">mtdnot</a> — 創設者</li>
+    </ul>
+    
+    <h2>Links</h2>
+    <ul>
+      <li><a href="https://github.com/CycleTree">GitHub</a></li>
+    </ul>
+  </article>
+</Base>
+
+<style>
+  .org-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  
+  .org-card {
+    display: block;
+    padding: 20px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  
+  .org-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+  
+  .org-card h3 {
+    color: var(--accent);
+    margin: 0 0 8px 0;
+  }
+  
+  .org-card p {
+    color: var(--text-dim);
+    margin: 0;
+    font-size: 14px;
+  }
+</style>

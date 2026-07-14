@@ -39,3 +39,9 @@ for (const app of ['personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 
 
   copyDirContents(join(appDir, 'dist'), join(distDir, app));
 }
+
+const foundDir = join(rootDir, 'found');
+
+if (existsSync(foundDir)) {
+  copyDirContents(foundDir, join(distDir, 'found'));
+}

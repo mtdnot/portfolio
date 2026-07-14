@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="16" viewBox="0 0 200 16">
+  <defs>
+    <style>
+      .line { fill: none; stroke: #8b5cf6; stroke-width: 2; }
+      .node { fill: #8b5cf6; }
+    </style>
+  </defs>
+  <path class="line" d="M0 8 H50 L60 4 H120 L130 8 H180"/>
+  <circle class="node" cx="0" cy="8" r="3"/>
+  <circle class="node" cx="60" cy="4" r="4"/>
+  <circle class="node" cx="130" cy="8" r="3"/>
+  <circle class="node" cx="180" cy="8" r="4"/>
+</svg>

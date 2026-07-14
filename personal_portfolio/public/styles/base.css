@@ -236,6 +236,10 @@ h3 {
     color: #666;
 }
 
+.identity-links {
+    margin-top: 12px;
+}
+
 .project-block {
     margin-bottom: 20px;
 }

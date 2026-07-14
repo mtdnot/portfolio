@@ -25,6 +25,11 @@ const profile = {
     label: '索(あなぐる)',
     href: 'https://blog.mtdnot.dev',
   },
+  links: [
+    { label: 'Found', href: '/found/' },
+    { label: '索(あなぐる)', href: 'https://blog.mtdnot.dev' },
+    { label: 'Frexida', href: 'https://frexida.com' },
+  ],
   contact: 'contact[at]mtdnot.dev',
 };
 ---
@@ -99,6 +104,15 @@ const profile = {
             <h2># Blog</h2>
             <ul>
               <li><a href={profile.blog.href} target="_blank" rel="noreferrer">{profile.blog.label}</a></li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># Links</h2>
+            <ul>
+              {profile.links.map((item) => (
+                <li><a href={item.href} target={item.href.startsWith('/') ? undefined : '_blank'} rel="noreferrer">{item.label}</a></li>
+              ))}
             </ul>
           </div>
         </div>

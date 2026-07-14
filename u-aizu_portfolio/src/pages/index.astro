@@ -1,4 +1,8 @@
 ---
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
 const profile = {
   name: '松田直和',
   handle: 'ナツ',
@@ -43,7 +47,7 @@ const profile = {
         <h1>U-Aizu Profile</h1>
 
         <div class="profile-visuals">
-          <img src="/images/icon.png" alt={`${profile.name}のアイコン`} class="portrait-image" />
+          <img src={`${base}images/icon.png`} alt={`${profile.name}のアイコン`} class="portrait-image" />
         </div>
 
         <p class="name-line">

@@ -1,3 +1,9 @@
+---
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
 <div class="loading-screen" id="loadingScreen">
   <div class="watch-container loading-watches">
     <div class="pocket-watch" id="pocketWatch">
@@ -52,12 +58,12 @@
           <div class="clock-numbers" id="clockNumbers2"></div>
           <div class="clock-hands">
             <div class="hand hour-hand" id="hourHand2"></div>
-            <div class="hand minute-hand" id="minuteHand2"></div>
-            <div class="hand second-hand" id="secondHand2"></div>
-            <div class="center-dot"></div>
+          <div class="hand minute-hand" id="minuteHand2"></div>
+          <div class="hand second-hand" id="secondHand2"></div>
+          <div class="center-dot"></div>
           </div>
           <div class="watch-icon">
-            <img src="avatar.png" alt="Icon" />
+            <img src={`${base}avatar.png`} alt="Icon" />
           </div>
         </div>
       </div>

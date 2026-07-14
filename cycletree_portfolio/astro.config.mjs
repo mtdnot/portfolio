@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
 
+const standalone = process.env.CYCLETREE_STANDALONE === '1';
+
 export default defineConfig({
-  base: '/cycletree_portfolio',
+  base: standalone ? '/' : '/cycletree_portfolio',
   output: 'static',
   devToolbar: {
     enabled: false

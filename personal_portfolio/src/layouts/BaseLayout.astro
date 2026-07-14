@@ -1,0 +1,31 @@
+---
+const { title = 'mtdnot - 存在木', includeSceneScript = true } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href={`${base}avatar.png`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}avatar.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${base}avatar.png`} />
+    <link rel="apple-touch-icon" href={`${base}avatar.png`} />
+    <link rel="stylesheet" href={`${base}styles/base.css`} />
+    <link rel="stylesheet" href={`${base}styles/scene.css`} />
+  </head>
+  <body>
+    <slot />
+    {includeSceneScript && <script is:inline type="module" src={`${base}scripts/modules/bootstrap.js`}></script>}
+  </body>
+</html>

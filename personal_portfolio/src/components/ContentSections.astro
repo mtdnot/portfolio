@@ -1,0 +1,26 @@
+---
+import { identityFields, quote } from '../data/profile';
+---
+
+<div class="content-wrapper">
+  <div class="container">
+    <section class="section">
+      <h2>IDENTITY</h2>
+      <div class="content identity-content">
+        <img src="avatar.png" alt="mtdnot" class="identity-avatar" />
+        <img src="photo.jpg" alt="workspace" class="identity-photo" />
+        <div>
+          {identityFields.map(([label, value]) => (
+            <div class="field">
+              <span class="label">{label}:</span>
+              <span class="value">{value}</span>
+            </div>
+          ))}
+          <div class="field quote-field">
+            <span class="value">{quote}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

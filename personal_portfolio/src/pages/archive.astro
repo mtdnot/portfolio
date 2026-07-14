@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { archiveSections } from '../data/archive';
+---
+
+<BaseLayout title="mtdnot - Archive" includeSceneScript={false}>
+  <div class="archive-page">
+    <div class="archive-container">
+      <div class="back-link">
+        <a href="./">← Back to Profile</a>
+      </div>
+
+      <h1>Archive</h1>
+
+      {archiveSections.map((section) => (
+        <section class="archive-section">
+          <h2>{section.title}</h2>
+
+          {section.type === 'links' ? (
+            <div class="archive-links">
+              {section.items.map((item) => (
+                <a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a>
+              ))}
+            </div>
+          ) : (
+            section.items.map((item) => (
+              <div class="archive-project">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <div class="archive-project-links">
+                  {item.links.map((link) => (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <style>
+    .archive-page {
+      min-height: 100vh;
+      background: #f7f9fb;
+      color: #333;
+      padding: 40px 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .archive-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .back-link {
+      margin-bottom: 30px;
+      display: inline-block;
+    }
+
+    .back-link a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      color: #333;
+    }
+
+    .archive-section {
+      margin-bottom: 40px;
+    }
+
+    .archive-section h2 {
+      font-size: 1.2em;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .archive-project {
+      margin-bottom: 25px;
+    }
+
+    .archive-project h3 {
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+
+    .archive-project p {
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    .archive-project-links a {
+      color: #333;
+      text-decoration: none;
+      margin-right: 15px;
+      font-size: 0.85em;
+    }
+
+    .archive-project-links a:hover,
+    .archive-links a:hover {
+      text-decoration: underline;
+    }
+
+    .archive-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .archive-links a {
+      color: #333;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+  </style>
+</BaseLayout>

@@ -1,8 +1,5 @@
-export const identityFields = [
-  ['Name', 'mtdnot'],
-] as const;
-
 export const identityLinks = [
-  { label: 'Found', href: '/found/' },
-  { label: '索(あなぐる)', href: 'https://blog.mtdnot.dev' },
+  { label: 'ANAG', href: '/found/anag/' },
+  { label: 'Refixa', href: '/found/refixa/' },
+  { label: 'Personal', href: 'https://mtdnot.dev/' },
 ] as const;

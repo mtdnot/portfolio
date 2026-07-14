@@ -1,0 +1,242 @@
+---
+const profile = {
+  name: '松田直和',
+  handle: 'ナツ',
+  affiliation: '会津大学 学部2年(33期)',
+  studentId: 's1330019',
+  className: 'C1',
+  laboratory: '未定',
+  researchTopics: [
+    '地震の前兆現象の分析',
+  ],
+  circles: [
+    'Zli',
+    'DMC',
+  ],
+  boasts: ['1年間で67単位とった'],
+  sns: [
+    { label: 'Twitter', href: 'https://x.com/mtdnot' },
+    { label: 'GitHub', href: 'https://github.com/mtdnot/' },
+    { label: '論文サイト(mock)', href: '#' },
+  ],
+  contacts: [
+    { label: 'contact[at]mtdnot.dev' },
+    { label: 'Twitter | @mtdnot', href: 'https://x.com/mtdnot' },
+  ],
+};
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{profile.name} | u-aizu portfolio</title>
+    <meta
+      name="description"
+      content={`${profile.name}の大学向けプロフィール。所属、研究テーマ、SNS、連絡先をまとめたページ。`}
+    />
+  </head>
+  <body>
+    <main class="page">
+      <section class="profile-block">
+        <h1>U-Aizu Profile</h1>
+
+        <div class="profile-visuals">
+          <img src="/images/icon.png" alt={`${profile.name}のアイコン`} class="portrait-image" />
+        </div>
+
+        <p class="name-line">
+          {profile.name}
+          <span class="handle">({profile.handle})</span>
+        </p>
+
+        <div class="content-block">
+          <div class="section">
+            <h2># Basic</h2>
+            <ul>
+              <li>所属 : {profile.affiliation}</li>
+              <li>学籍番号 : {profile.studentId}</li>
+              <li>クラス : {profile.className}</li>
+              <li>研究室 : {profile.laboratory}</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 研究テーマ</h2>
+            <ul>
+              {profile.researchTopics.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># サークル</h2>
+            <ul>
+              {profile.circles.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 自慢</h2>
+            <ul>
+              {profile.boasts.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># SNS</h2>
+            <ul>
+              {profile.sns.map((item) => (
+                <li>
+                  {item.href === '#' ? item.label : <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 連絡</h2>
+            <ul>
+              {profile.contacts.map((item) => (
+                <li>
+                  {item.href ? <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a> : item.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bg: #f8f8f6;
+    --text: #111;
+    --muted: #5c5c5c;
+    --line: #d8d8d3;
+    --accent: #0b57d0;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .profile-block {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .profile-visuals {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .portrait-image {
+    width: 112px;
+    height: 112px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--line);
+  }
+
+  .name-line {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+
+  .handle {
+    color: var(--muted);
+  }
+
+  .mail {
+    margin-bottom: 0.7rem;
+    text-align: center;
+  }
+
+  .content-block {
+    background: #ecece8;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px 28px;
+  }
+
+  .section + .section {
+    margin-top: 1.4rem;
+  }
+
+  .section h2 {
+    font-size: 1rem;
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+
+  li {
+    line-height: 1.8;
+  }
+
+  @media (max-width: 900px) {
+    .profile-visuals {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 32px 16px 56px;
+    }
+
+    .profile-visuals {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

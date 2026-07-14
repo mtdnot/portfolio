@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mtdnot - 存在木</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="tree_exist.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="tree_exist.png">
+    <link rel="apple-touch-icon" href="tree_exist.png">
+    <style>
+        .logo-container {
+            position: relative;
+        }
+        
+        .fractal-tree {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #treeCanvas {
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .fractal-tree {
+                max-width: 350px;
+            }
+        }
+        
+        /* Fullscreen mode styles */
+        body.fullscreen {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        
+        body.fullscreen .container {
+            display: none;
+        }
+        
+        .fullscreen-tree {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: #ffffff;
+        }
+        
+        .fullscreen-tree #treeCanvas {
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        /* Exit button */
+        .exit-button {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border: 2px solid #333;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+        
+        .exit-button:hover {
+            background: rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Control panel toggle button */
+        .control-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .control-toggle:hover {
+            background: rgba(240, 240, 240, 0.9);
+        }
+
+        /* Fullscreen button */
+        .fullscreen-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-button:hover {
+            background: rgba(240, 240, 240, 0.9);
+        }
+
+        /* Control panel */
+        .control-panel {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            max-width: 140px;
+        }
+        
+        /* Mobile responsive control panel */
+        @media (max-width: 768px) {
+            .control-panel {
+                font-size: 7px;
+                padding: 4px;
+                gap: 2px;
+                max-width: 80px;
+                left: 10px;
+                right: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+                max-height: 120px;
+                overflow-y: auto;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* Internet Explorer 10+ */
+            }
+            
+            .control-panel::-webkit-scrollbar {
+                display: none; /* WebKit */
+            }
+            
+            .control-group {
+                gap: 1px;
+                width: 36px;
+                flex-shrink: 0;
+            }
+            
+            .control-group label {
+                font-size: 6px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .toggle-button {
+                padding: 2px 3px;
+                font-size: 6px;
+                border-radius: 2px;
+            }
+            
+            .range-input {
+                width: 35px;
+                height: 12px;
+            }
+        }
+
+        .control-panel.visible {
+            display: flex;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .control-group label {
+            font-weight: 500;
+            color: #333;
+            font-size: 9px;
+        }
+
+        .toggle-button {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 4px 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-family: inherit;
+            font-size: 9px;
+        }
+
+        .toggle-button:hover {
+            background: #e0e0e0;
+        }
+
+        .toggle-button.active {
+            background: #333;
+            color: white;
+        }
+
+        .range-input {
+            width: 80px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ROOT Section -->
+        <section class="section root-section">
+            <div class="logo-container">
+                <div class="fractal-tree">
+                    <canvas id="treeCanvas"></canvas>
+                </div>
+            </div>
+            <p class="statement">"存在木 : a structure and existence"</p>
+        </section>
+
+        <!-- IDENTITY Section -->
+        <section class="section">
+            <h2>IDENTITY</h2>
+            <div class="content">
+                <div class="field">
+                    <span class="label">Name:</span>
+                    <span class="value">mtdnot</span>
+                </div>
+                <div class="field">
+                    <span class="label">Model:</span>
+                    <span class="value">存在木</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM Section -->
+        <section class="section">
+            <h2>SYSTEM</h2>
+            <div class="content">
+                <div class="field">
+                    <span class="label">OS:</span>
+                    <span class="value">NixOS, Arch Linux, Ubuntu, ChromeOS</span>
+                </div>
+                <div class="field">
+                    <span class="label">Languages:</span>
+                    <span class="value">Lua, GLSL, Lisp, ドイツ語, C, C++, Python</span>
+                </div>
+                <div class="field">
+                    <span class="label">Editors:</span>
+                    <span class="value">Emacs, DokuWiki</span>
+                </div>
+                <div class="field">
+                    <span class="label">Favorite tools:</span>
+                    <span class="value">AWS</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS Section -->
+        <section class="section">
+            <h2>PROJECTS</h2>
+            <div class="content">
+                <div class="project">
+                    <h3>AI Chat Application</h3>
+                    <p>AI-powered chat platform for sensitive medical discussions using OpenAI API</p>
+                    <div class="project-links">
+                        <a href="https://chat.mtdnot.dev/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                        <a href="https://mtdnot.dev/web-sites/ncc/blog/2024/03/19/299/" target="_blank" rel="noopener noreferrer">Blog Post</a>
+                        <a href="https://github.com/mtdnot/AIChatApp" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <h3>CNC Pen Plotter</h3>
+                    <p>Mechanical device using G-code</p>
+                </div>
+                <div class="project">
+                    <h3>Fractal Generation</h3>
+                    <p>Using OpenGL to render recursive structures</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERESTS Section -->
+        <section class="section">
+            <h2>INTERESTS</h2>
+            <div class="content">
+                <div class="field">
+                    <span class="label">Art:</span>
+                    <span class="value">Glitchcore, Surrealism</span>
+                </div>
+                <div class="field">
+                    <span class="label">Subjects:</span>
+                    <span class="value">Complex systems, fractals, mechanical fabrication</span>
+                </div>
+                <div class="field">
+                    <span class="label">Hobbies:</span>
+                    <span class="value">Collecting retro PCs (esp. 1990s), 1969 American cars, cafes and coffee</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- LINKS Section -->
+        <section class="section">
+            <h2>LINKS</h2>
+            <div class="content">
+                <div class="links">
+                    <a href="https://github.com/mtdnot" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://x.com/mtdnot" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+                    <a href="https://www.facebook.com/profile.php?id=61559472083047" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <a href="https://mtdnot.dev/web-sites/ncc/blog/" target="_blank" rel="noopener noreferrer">Blog</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        class FractalTree {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.branchPositions = new Map(); // Store actual positions for connection points
+                this.clickableAreas = []; // Store clickable areas for branches
+                this.animationId = null;
+                this.startTime = Date.now();
+                this.isFullscreen = false;
+                
+                // 3D parameters
+                this.rotationY = 0; // Y-axis rotation for 3D effect
+                this.rotationSpeed = 0.003; // Slower rotation
+                this.is3D = true; // 3D mode toggle
+                
+                // Camera parameters
+                this.cameraDistance = 800; // Camera distance
+                this.cameraOffsetX = 0; // Camera X offset
+                this.cameraOffsetY = 0; // Camera Y offset
+                this.cameraAngleX = 0; // Camera X rotation (pitch)
+                this.cameraAngleY = 0; // Camera Y rotation (yaw)
+                this.cameraAngleZ = 0; // Camera Z rotation (roll)
+                
+                // Animated level cycling for fullscreen mode
+                this.levelCycleStart = Date.now(); // Start time for level cycling
+                this.currentFullscreenLevel = 1; // Current level in fullscreen mode
+                
+                // Mouse control for branch behavior
+                this.mouseX = 0; // Current mouse X position for rotation
+                this.mouseY = 0; // Current mouse Y position for branch angle
+                this.branchAngleOffset = 0; // Angle offset based on mouse X position (0-360 degrees)
+                this.branchAngle = Math.PI/2; // Branch angle based on mouse Y position (0-180 degrees)
+                
+                // Branch URLs - customize these as needed
+                this.branchUrls = {
+                    0: '/natsu/', // Left branch (XY plane)
+                    1: '/fixus/', // Right branch (XY plane)
+                    2: '/angis/', // Forward branch (XZ plane)
+                    3: 'https://github.com/mtdnot' // Backward branch (XZ plane)
+                };
+                
+                this.setupCanvas();
+                this.animate(); // Start animation
+                this.setupClickHandler();
+                this.setupFullscreenHandler();
+                this.setupMouseControl();
+                this.setupControlPanel();
+                
+                window.addEventListener('resize', () => {
+                    this.setupCanvas();
+                });
+            }
+            
+            setupCanvas() {
+                if (this.isFullscreen) {
+                    // Fullscreen mode - use full viewport
+                    const maxWidth = window.innerWidth;
+                    const maxHeight = window.innerHeight;
+                    
+                    this.canvas.width = maxWidth;
+                    this.canvas.height = maxHeight;
+                    this.canvas.style.width = maxWidth + 'px';
+                    this.canvas.style.height = maxHeight + 'px';
+                    
+                    this.trunkHeight = maxHeight * 0.3;
+                    this.trunkWidth = Math.max(maxWidth * 0.003, 8);
+                    this.baseX = maxWidth / 2;
+                    this.baseY = maxHeight - 50;
+                } else {
+                    // Normal mode
+                    const container = this.canvas.parentElement;
+                    const containerRect = container.getBoundingClientRect();
+                    const isMobile = window.innerWidth <= 768;
+                    
+                    // Use container width with some padding
+                    const maxWidth = Math.min(containerRect.width - 20, isMobile ? 350 : 500);
+                    const maxHeight = Math.min(window.innerHeight * 0.4, isMobile ? 250 : 400);
+                    
+                    const aspectRatio = 4/3;
+                    let width = maxWidth;
+                    let height = width / aspectRatio;
+                    
+                    if (height > maxHeight) {
+                        height = maxHeight;
+                        width = height * aspectRatio;
+                    }
+                    
+                    this.canvas.width = width;
+                    this.canvas.height = height;
+                    this.canvas.style.width = width + 'px';
+                    this.canvas.style.height = height + 'px';
+                    
+                    this.trunkHeight = height * 0.45;
+                    this.trunkWidth = Math.max(width * 0.005, isMobile ? 3 : 6);
+                    this.baseX = width / 2;
+                    this.baseY = height - 30;
+                }
+            }
+            
+            setupFullscreenHandler() {
+                // Click on canvas (but not on branches) to enter fullscreen
+                this.canvas.addEventListener('click', (event) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = event.clientX - rect.left;
+                    const y = event.clientY - rect.top;
+                    
+                    // Check if click is on any branch
+                    let clickedBranch = false;
+                    for (const area of this.clickableAreas) {
+                        if (this.isPointInBranch(x, y, area)) {
+                            // Branch click - handle URL navigation
+                            const url = this.branchUrls[area.branchId];
+                            if (url) {
+                                if (url.startsWith('http')) {
+                                    window.open(url, '_blank');
+                                } else {
+                                    window.location.href = url;
+                                }
+                            }
+                            clickedBranch = true;
+                            break;
+                        }
+                    }
+                    
+                    // If not clicking on branch and not in fullscreen, enter fullscreen
+                    if (!clickedBranch && !this.isFullscreen) {
+                        this.enterFullscreen();
+                    }
+                });
+                
+                // ESC key to exit fullscreen
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && this.isFullscreen) {
+                        this.exitFullscreen();
+                    }
+                });
+            }
+            
+            enterFullscreen() {
+                this.isFullscreen = true;
+                this.levelCycleStart = Date.now(); // Reset level cycling when entering fullscreen
+                this.currentFullscreenLevel = 1; // Start from level 1
+                document.body.classList.add('fullscreen');
+                
+                // Create fullscreen container
+                const fullscreenContainer = document.createElement('div');
+                fullscreenContainer.className = 'fullscreen-tree';
+                
+                // Create exit button
+                const exitButton = document.createElement('div');
+                exitButton.className = 'exit-button';
+                exitButton.innerHTML = '×';
+                exitButton.addEventListener('click', () => this.exitFullscreen());
+                
+                // Move canvas to fullscreen container
+                const originalParent = this.canvas.parentElement;
+                fullscreenContainer.appendChild(this.canvas);
+                document.body.appendChild(fullscreenContainer);
+                document.body.appendChild(exitButton);
+                
+                // Store original parent for restoration
+                this.originalParent = originalParent;
+                this.fullscreenContainer = fullscreenContainer;
+                this.exitButton = exitButton;
+                
+                // Resize canvas for fullscreen
+                this.setupCanvas();
+            }
+            
+            exitFullscreen() {
+                this.isFullscreen = false;
+                document.body.classList.remove('fullscreen');
+                
+                // Restore canvas to original location
+                this.originalParent.appendChild(this.canvas);
+                
+                // Remove fullscreen elements
+                if (this.fullscreenContainer) {
+                    this.fullscreenContainer.remove();
+                }
+                if (this.exitButton) {
+                    this.exitButton.remove();
+                }
+                
+                // Resize canvas back to normal
+                this.setupCanvas();
+            }
+            
+            // 3D to 2D projection
+            project3D(x, y, z) {
+                if (!this.is3D) {
+                    // 2D mode: simple orthographic projection
+                    return {
+                        x: this.baseX + x + this.cameraOffsetX,
+                        y: this.baseY + y + this.cameraOffsetY,
+                        z: z,
+                        scale: 1.0
+                    };
+                }
+                
+                // 3D mode: perspective projection with camera rotation
+                let rotX = x, rotY = y, rotZ = z;
+                
+                // Apply automatic Y rotation
+                const cosY = Math.cos(this.rotationY);
+                const sinY = Math.sin(this.rotationY);
+                const tempX = rotX * cosY - rotZ * sinY;
+                rotZ = rotX * sinY + rotZ * cosY;
+                rotX = tempX;
+                
+                // Apply camera angle rotations
+                // X rotation (pitch)
+                if (this.cameraAngleX !== 0) {
+                    const cosX = Math.cos(this.cameraAngleX);
+                    const sinX = Math.sin(this.cameraAngleX);
+                    const tempY = rotY * cosX - rotZ * sinX;
+                    rotZ = rotY * sinX + rotZ * cosX;
+                    rotY = tempY;
+                }
+                
+                // Y rotation (yaw) - additional to automatic rotation
+                if (this.cameraAngleY !== 0) {
+                    const cosY2 = Math.cos(this.cameraAngleY);
+                    const sinY2 = Math.sin(this.cameraAngleY);
+                    const tempX2 = rotX * cosY2 - rotZ * sinY2;
+                    rotZ = rotX * sinY2 + rotZ * cosY2;
+                    rotX = tempX2;
+                }
+                
+                // Z rotation (roll)
+                if (this.cameraAngleZ !== 0) {
+                    const cosZ = Math.cos(this.cameraAngleZ);
+                    const sinZ = Math.sin(this.cameraAngleZ);
+                    const tempX3 = rotX * cosZ - rotY * sinZ;
+                    rotY = rotX * sinZ + rotY * cosZ;
+                    rotX = tempX3;
+                }
+                
+                // Perspective projection with adjustable camera distance
+                const scale = this.cameraDistance / (this.cameraDistance + rotZ + 200);
+                
+                return {
+                    x: this.baseX + rotX * scale * 0.8 + this.cameraOffsetX,
+                    y: this.baseY + rotY * scale * 0.8 + this.cameraOffsetY,
+                    z: rotZ,
+                    scale: Math.max(scale * 0.8, 0.3)
+                };
+            }
+
+            // Pure 2D fractal unit: draws a single branch with 2 sub-branches at 180° (2D only)
+            draw2DFractalUnit(centerX, centerY, scale, time, branchId, parentAngle = null, depth = 0) {
+                const branchLength = this.trunkHeight * scale;
+                const branchThickness = this.trunkWidth * scale;
+                
+                const branchEndpoints = [];
+                
+                // Determine trunk angle
+                let trunkAngle;
+                let trunkStartX = centerX;
+                let trunkStartY = centerY;
+                let trunkEndX, trunkEndY;
+                
+                if (parentAngle !== null) {
+                    // Sub-fractal: no trunk, branches start directly from parent endpoint
+                    trunkAngle = parentAngle;
+                    trunkEndX = centerX;
+                    trunkEndY = centerY;
+                } else {
+                    // Root fractal: draw vertical trunk
+                    trunkAngle = -Math.PI/2; // Point upward
+                    trunkEndX = centerX;
+                    trunkEndY = centerY - branchLength; // Move up
+                    
+                    // Draw trunk
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.baseX + trunkStartX + this.cameraOffsetX, 
+                                   this.baseY + trunkStartY + this.cameraOffsetY);
+                    this.ctx.lineTo(this.baseX + trunkEndX + this.cameraOffsetX, 
+                                   this.baseY + trunkEndY + this.cameraOffsetY);
+                    this.ctx.strokeStyle = '#000000';
+                    this.ctx.lineWidth = branchThickness;
+                    this.ctx.lineCap = 'round';
+                    this.ctx.stroke();
+                }
+                
+                // Create 2 branches at 180° angles in pure 2D
+                // Use same direction as 3D mode: larger angle = more open
+                const branchAngle = Math.PI - this.branchAngle; // Invert to match 3D behavior
+                
+                for (let i = 0; i < 2; i++) {
+                    // Calculate branch angle (180° apart)
+                    const side = (i === 0) ? 1 : -1;
+                    const finalBranchAngle = trunkAngle + (branchAngle * side);
+                    
+                    // Calculate branch end position in pure 2D with CONSTANT length
+                    const branchEndX = trunkEndX + Math.cos(finalBranchAngle) * branchLength;
+                    const branchEndY = trunkEndY + Math.sin(finalBranchAngle) * branchLength;
+                    
+                    // Draw branch
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.baseX + trunkEndX + this.cameraOffsetX, 
+                                   this.baseY + trunkEndY + this.cameraOffsetY);
+                    this.ctx.lineTo(this.baseX + branchEndX + this.cameraOffsetX, 
+                                   this.baseY + branchEndY + this.cameraOffsetY);
+                    this.ctx.strokeStyle = '#000000';
+                    this.ctx.lineWidth = branchThickness;
+                    this.ctx.lineCap = 'round';
+                    this.ctx.stroke();
+                    
+                    // Store endpoint for sub-fractal
+                    branchEndpoints.push({
+                        x: branchEndX,
+                        y: branchEndY,
+                        branchId: branchId * 10 + i,
+                        angle: finalBranchAngle // Pass angle instead of direction
+                    });
+                    
+                    // Store clickable area only for root level
+                    if (scale === 1.0) {
+                        this.clickableAreas.push({
+                            branchId: i,
+                            startX: this.baseX + trunkEndX + this.cameraOffsetX,
+                            startY: this.baseY + trunkEndY + this.cameraOffsetY,
+                            endX: this.baseX + branchEndX + this.cameraOffsetX,
+                            endY: this.baseY + branchEndY + this.cameraOffsetY,
+                            clickRadius: Math.max(15, branchThickness * 3)
+                        });
+                        
+                        // Store branch tip position for letter drawing (only at leaf nodes)
+                        if (!this.branchTips) this.branchTips = [];
+                        // Only add letters at the maximum depth (leaf nodes)
+                        const currentMaxDepth = this.isFullscreen ? this.currentFullscreenLevel : 1;
+                        if (depth === currentMaxDepth - 1) {
+                            this.branchTips.push({ 
+                                position: {
+                                    x: this.baseX + branchEndX + this.cameraOffsetX,
+                                    y: this.baseY + branchEndY + this.cameraOffsetY,
+                                    scale: 1.0
+                                }, 
+                                index: i 
+                            });
+                        }
+                    }
+                }
+                
+                return branchEndpoints;
+            }
+
+            // Base fractal unit: draws a single branch with 4 sub-branches
+            drawBaseFractalUnit(centerX, centerY, centerZ, scale, time, branchId, parentDirection = null, depth = 0) {
+                // Define the base unit: one trunk with 4 branches
+                const branchLength = this.trunkHeight * scale;
+                const branchThickness = this.trunkWidth * scale;
+                
+                // Store branch endpoints for sub-fractals
+                const branchEndpoints = [];
+                
+                // For root fractal, draw trunk; for sub-fractals, only draw branches from the connection point
+                let trunkTopX = centerX;
+                let trunkTopY = centerY;
+                let trunkTopZ = centerZ;
+                let trunkDirection;
+                
+                if (parentDirection) {
+                    // Sub-fractal: no trunk, branches start directly from parent endpoint
+                    trunkDirection = parentDirection;
+                } else {
+                    // Root fractal: draw trunk pointing upward
+                    trunkDirection = { x: 0, y: -1, z: 0 };
+                    
+                    // Calculate trunk end position
+                    const trunkEndX = centerX + trunkDirection.x * branchLength;
+                    const trunkEndY = centerY + trunkDirection.y * branchLength;
+                    const trunkEndZ = centerZ + trunkDirection.z * branchLength;
+                    
+                    // Draw trunk aligned with its direction
+                    const trunkStartProj = this.project3D(centerX, centerY, centerZ);
+                    const trunkEndProj = this.project3D(trunkEndX, trunkEndY, trunkEndZ);
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(trunkStartProj.x, trunkStartProj.y);
+                    this.ctx.lineTo(trunkEndProj.x, trunkEndProj.y);
+                    this.ctx.strokeStyle = '#000000';
+                    this.ctx.lineWidth = branchThickness * Math.min(trunkStartProj.scale, trunkEndProj.scale);
+                    this.ctx.lineCap = 'round';
+                    this.ctx.stroke();
+                    
+                    // Set branch origin to trunk end
+                    trunkTopX = trunkEndX;
+                    trunkTopY = trunkEndY;
+                    trunkTopZ = trunkEndZ;
+                }
+                
+                // Create coordinate system relative to trunk direction
+                // Only apply mouse X rotation to root level, not sub-fractals
+                const angleOffset = parentDirection ? 0 : this.branchAngleOffset; // X-axis rotation only for root
+                const branchAngle = this.branchAngle; // Y-axis angle control (0-180°)
+                
+                // Create local coordinate system with trunk direction as the "up" axis
+                let localUp = trunkDirection;
+                
+                // Create perpendicular vectors to trunk direction
+                let localRight, localForward;
+                
+                if (Math.abs(localUp.y) < 0.9) {
+                    // Trunk is not vertical, use cross product with world Y
+                    localRight = {
+                        x: localUp.z,
+                        y: 0,
+                        z: -localUp.x
+                    };
+                } else {
+                    // Trunk is nearly vertical, use cross product with world X
+                    localRight = {
+                        x: 0,
+                        y: localUp.z,
+                        z: -localUp.y
+                    };
+                }
+                
+                // Normalize right vector
+                const rightLength = Math.sqrt(localRight.x**2 + localRight.y**2 + localRight.z**2);
+                localRight.x /= rightLength;
+                localRight.y /= rightLength;
+                localRight.z /= rightLength;
+                
+                // Create forward vector (perpendicular to both up and right)
+                localForward = {
+                    x: localUp.y * localRight.z - localUp.z * localRight.y,
+                    y: localUp.z * localRight.x - localUp.x * localRight.z,
+                    z: localUp.x * localRight.y - localUp.y * localRight.x
+                };
+                
+                // Create 4 base directions in local coordinate system
+                const baseDirections = [
+                    {
+                        x: Math.cos(angleOffset) * localRight.x + Math.sin(angleOffset) * localForward.x,
+                        y: Math.cos(angleOffset) * localRight.y + Math.sin(angleOffset) * localForward.y,
+                        z: Math.cos(angleOffset) * localRight.z + Math.sin(angleOffset) * localForward.z
+                    },
+                    {
+                        x: Math.cos(angleOffset + Math.PI) * localRight.x + Math.sin(angleOffset + Math.PI) * localForward.x,
+                        y: Math.cos(angleOffset + Math.PI) * localRight.y + Math.sin(angleOffset + Math.PI) * localForward.y,
+                        z: Math.cos(angleOffset + Math.PI) * localRight.z + Math.sin(angleOffset + Math.PI) * localForward.z
+                    },
+                    {
+                        x: Math.cos(angleOffset + Math.PI/2) * localRight.x + Math.sin(angleOffset + Math.PI/2) * localForward.x,
+                        y: Math.cos(angleOffset + Math.PI/2) * localRight.y + Math.sin(angleOffset + Math.PI/2) * localForward.y,
+                        z: Math.cos(angleOffset + Math.PI/2) * localRight.z + Math.sin(angleOffset + Math.PI/2) * localForward.z
+                    },
+                    {
+                        x: Math.cos(angleOffset + 3*Math.PI/2) * localRight.x + Math.sin(angleOffset + 3*Math.PI/2) * localForward.x,
+                        y: Math.cos(angleOffset + 3*Math.PI/2) * localRight.y + Math.sin(angleOffset + 3*Math.PI/2) * localForward.y,
+                        z: Math.cos(angleOffset + 3*Math.PI/2) * localRight.z + Math.sin(angleOffset + 3*Math.PI/2) * localForward.z
+                    }
+                ];
+                
+                // Apply branch angle relative to trunk direction
+                const directions = baseDirections.map(baseDir => {
+                    // Mix base direction with trunk direction based on branch angle
+                    const trunkComponent = -Math.cos(branchAngle);
+                    const radialComponent = Math.sin(branchAngle);
+                    
+                    return {
+                        x: baseDir.x * radialComponent + localUp.x * trunkComponent,
+                        y: baseDir.y * radialComponent + localUp.y * trunkComponent,
+                        z: baseDir.z * radialComponent + localUp.z * trunkComponent
+                    };
+                });
+                
+                for (let i = 0; i < 4; i++) {
+                    const dir = directions[i];
+                    
+                    // No oscillation - static branches
+                    let oscDir = { ...dir };
+                    
+                    const branchEndX = trunkTopX + oscDir.x * branchLength;
+                    const branchEndY = trunkTopY + oscDir.y * branchLength;
+                    const branchEndZ = trunkTopZ + oscDir.z * branchLength;
+                    
+                    // Draw branch
+                    const branchStartProj = this.project3D(trunkTopX, trunkTopY, trunkTopZ);
+                    const branchEndProj = this.project3D(branchEndX, branchEndY, branchEndZ);
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(branchStartProj.x, branchStartProj.y);
+                    this.ctx.lineTo(branchEndProj.x, branchEndProj.y);
+                    this.ctx.strokeStyle = '#000000';
+                    this.ctx.lineWidth = branchThickness * Math.min(branchStartProj.scale, branchEndProj.scale);
+                    this.ctx.lineCap = 'round';
+                    this.ctx.stroke();
+                    
+                    // Store endpoint for sub-fractal with direction information
+                    branchEndpoints.push({
+                        x: branchEndX,
+                        y: branchEndY,
+                        z: branchEndZ,
+                        branchId: branchId * 10 + i,
+                        direction: oscDir // Pass the direction for consistent sub-fractal orientation
+                    });
+                    
+                    // Store clickable area only for root level
+                    if (scale === 1.0) {
+                        this.clickableAreas.push({
+                            branchId: i,
+                            startX: branchStartProj.x,
+                            startY: branchStartProj.y,
+                            endX: branchEndProj.x,
+                            endY: branchEndProj.y,
+                            clickRadius: Math.max(15, branchThickness * 3)
+                        });
+                        
+                        // Store branch tip position for letter drawing (only at leaf nodes)
+                        if (!this.branchTips) this.branchTips = [];
+                        // Only add letters at the maximum depth (leaf nodes)
+                        const currentMaxDepth = this.isFullscreen ? this.currentFullscreenLevel : 1;
+                        if (depth === currentMaxDepth - 1) {
+                            this.branchTips.push({ position: branchEndProj, index: i });
+                        }
+                    }
+                }
+                
+                return branchEndpoints;
+            }
+
+            // Recursive 3D fractal drawing function
+            draw3DFractal(centerX, centerY, centerZ, scale, depth, maxDepth, time, branchId, parentDirection = null) {
+                if (depth >= maxDepth || scale < 0.1) return;
+                
+                const branchEndpoints = this.drawBaseFractalUnit(centerX, centerY, centerZ, scale, time, branchId, parentDirection, depth);
+                
+                if (depth < maxDepth) {
+                    const newScale = scale * 1.0;
+                    
+                    branchEndpoints.forEach(endpoint => {
+                        this.draw3DFractal(
+                            endpoint.x, 
+                            endpoint.y, 
+                            endpoint.z, 
+                            newScale, 
+                            depth + 1, 
+                            maxDepth, 
+                            time, 
+                            endpoint.branchId,
+                            endpoint.direction
+                        );
+                    });
+                }
+            }
+
+            // Recursive 2D fractal drawing function
+            draw2DFractal(centerX, centerY, scale, depth, maxDepth, time, branchId, parentAngle = null) {
+                if (depth >= maxDepth || scale < 0.1) return;
+                
+                const branchEndpoints = this.draw2DFractalUnit(centerX, centerY, scale, time, branchId, parentAngle, depth);
+                
+                if (depth < maxDepth) {
+                    const newScale = scale * 1.0;
+                    
+                    branchEndpoints.forEach(endpoint => {
+                        this.draw2DFractal(
+                            endpoint.x, 
+                            endpoint.y, 
+                            newScale, 
+                            depth + 1, 
+                            maxDepth, 
+                            time, 
+                            endpoint.branchId,
+                            endpoint.angle
+                        );
+                    });
+                }
+            }
+            
+            setupMouseControl() {
+                // Function to handle position input (mouse or touch)
+                const handlePositionInput = (x, y) => {
+                    // Update mouse positions
+                    this.mouseX = x;
+                    this.mouseY = y;
+                    
+                    // Convert X position to rotation angle (0-360 degrees)
+                    // Left side = 0°, right side = 360°
+                    const normalizedX = x / this.canvas.width; // 0 to 1
+                    this.branchAngleOffset = normalizedX * 2 * Math.PI; // 0 to 2π radians
+                    
+                    // Convert Y position to branch angle (0-180 degrees)
+                    // Top = 180°, bottom = 0° (reversed)
+                    const normalizedY = y / this.canvas.height; // 0 to 1
+                    this.branchAngle = (1 - normalizedY) * Math.PI; // π to 0 radians (180-0 degrees)
+                    
+                    // Check for branch hover for cursor
+                    let overBranch = false;
+                    for (const area of this.clickableAreas) {
+                        if (this.isPointInBranch(x, y, area)) {
+                            overBranch = true;
+                            break;
+                        }
+                    }
+                    
+                    this.canvas.style.cursor = overBranch ? 'pointer' : (this.isFullscreen ? 'default' : 'pointer');
+                };
+                
+                // Mouse events for desktop
+                this.canvas.addEventListener('mousemove', (event) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = event.clientX - rect.left;
+                    const y = event.clientY - rect.top;
+                    handlePositionInput(x, y);
+                });
+                
+                // Touch events for mobile
+                this.canvas.addEventListener('touchmove', (event) => {
+                    event.preventDefault(); // Prevent scrolling
+                    const rect = this.canvas.getBoundingClientRect();
+                    const touch = event.touches[0];
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    handlePositionInput(x, y);
+                });
+                
+                // Touch start event to enable immediate response
+                this.canvas.addEventListener('touchstart', (event) => {
+                    event.preventDefault();
+                    const rect = this.canvas.getBoundingClientRect();
+                    const touch = event.touches[0];
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    handlePositionInput(x, y);
+                });
+
+                // Touch end event for branch link navigation
+                this.canvas.addEventListener('touchend', (event) => {
+                    event.preventDefault();
+                    const rect = this.canvas.getBoundingClientRect();
+                    const touch = event.changedTouches[0];
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    
+                    // Check if tap is on any branch
+                    for (const area of this.clickableAreas) {
+                        if (this.isPointInBranch(x, y, area)) {
+                            // Branch tap - handle URL navigation
+                            const url = this.branchUrls[area.branchId];
+                            if (url) {
+                                if (url.startsWith('http')) {
+                                    window.open(url, '_blank');
+                                } else {
+                                    window.location.href = url;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                });
+            }
+            
+            setupControlPanel() {
+                // Create toggle button
+                const toggleButton = document.createElement('div');
+                toggleButton.className = 'control-toggle';
+                toggleButton.innerHTML = '⚙️';
+                
+                // Create fullscreen button
+                const fullscreenButton = document.createElement('div');
+                fullscreenButton.className = 'fullscreen-button';
+                fullscreenButton.innerHTML = '⛶';
+                
+                // Create control panel HTML
+                const controlPanel = document.createElement('div');
+                controlPanel.className = 'control-panel';
+                controlPanel.innerHTML = `
+                    <div class="control-group">
+                        <label>View</label>
+                        <div class="toggle-button ${this.is3D ? 'active' : ''}" id="toggle3D">
+                            ${this.is3D ? '3D' : '2D'}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Distance</label>
+                        <input type="range" class="range-input" id="cameraDistance" 
+                               min="400" max="1200" value="${this.cameraDistance}">
+                    </div>
+                    <div class="control-group">
+                        <label>Cam X</label>
+                        <input type="range" class="range-input" id="cameraX" 
+                               min="-200" max="200" value="${this.cameraOffsetX}">
+                    </div>
+                    <div class="control-group">
+                        <label>Cam Y</label>
+                        <input type="range" class="range-input" id="cameraY" 
+                               min="-200" max="200" value="${this.cameraOffsetY}">
+                    </div>
+                    <div class="control-group">
+                        <label>Pitch</label>
+                        <input type="range" class="range-input" id="cameraAngleX" 
+                               min="-90" max="90" value="${Math.round(this.cameraAngleX * 180 / Math.PI)}">
+                    </div>
+                    <div class="control-group">
+                        <label>Yaw</label>
+                        <input type="range" class="range-input" id="cameraAngleY" 
+                               min="-180" max="180" value="${Math.round(this.cameraAngleY * 180 / Math.PI)}">
+                    </div>
+                    <div class="control-group">
+                        <label>Roll</label>
+                        <input type="range" class="range-input" id="cameraAngleZ" 
+                               min="-180" max="180" value="${Math.round(this.cameraAngleZ * 180 / Math.PI)}">
+                    </div>
+                `;
+                
+                // Append all to the logo-container
+                const logoContainer = this.canvas.parentElement.parentElement;
+                logoContainer.appendChild(toggleButton);
+                logoContainer.appendChild(fullscreenButton);
+                logoContainer.appendChild(controlPanel);
+                
+                // Toggle functionality
+                toggleButton.addEventListener('click', () => {
+                    controlPanel.classList.toggle('visible');
+                });
+                
+                // Fullscreen functionality
+                fullscreenButton.addEventListener('click', () => {
+                    this.enterFullscreen();
+                });
+                
+                // Setup event listeners
+                document.getElementById('toggle3D').addEventListener('click', () => {
+                    this.is3D = !this.is3D;
+                    const button = document.getElementById('toggle3D');
+                    button.textContent = this.is3D ? '3D' : '2D';
+                    button.className = `toggle-button ${this.is3D ? 'active' : ''}`;
+                });
+                
+                document.getElementById('cameraDistance').addEventListener('input', (e) => {
+                    this.cameraDistance = parseInt(e.target.value);
+                });
+                
+                document.getElementById('cameraX').addEventListener('input', (e) => {
+                    this.cameraOffsetX = parseInt(e.target.value);
+                });
+                
+                document.getElementById('cameraY').addEventListener('input', (e) => {
+                    this.cameraOffsetY = parseInt(e.target.value);
+                });
+                
+                document.getElementById('cameraAngleX').addEventListener('input', (e) => {
+                    this.cameraAngleX = parseInt(e.target.value) * Math.PI / 180;
+                });
+                
+                document.getElementById('cameraAngleY').addEventListener('input', (e) => {
+                    this.cameraAngleY = parseInt(e.target.value) * Math.PI / 180;
+                });
+                
+                document.getElementById('cameraAngleZ').addEventListener('input', (e) => {
+                    this.cameraAngleZ = parseInt(e.target.value) * Math.PI / 180;
+                });
+            }
+            
+            setupClickHandler() {
+                // Click handler is now integrated into setupMouseControl
+                // This function remains for compatibility but mouse handling is above
+            }
+            
+            isPointInBranch(x, y, area) {
+                // Check if point is near the line (within clickable radius)
+                const dx = area.endX - area.startX;
+                const dy = area.endY - area.startY;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                
+                if (length === 0) return false;
+                
+                // Calculate distance from point to line
+                const t = Math.max(0, Math.min(1, ((x - area.startX) * dx + (y - area.startY) * dy) / (length * length)));
+                const projection = {
+                    x: area.startX + t * dx,
+                    y: area.startY + t * dy
+                };
+                
+                const distance = Math.sqrt((x - projection.x) ** 2 + (y - projection.y) ** 2);
+                return distance <= area.clickRadius;
+            }
+            
+            drawFloatingLetter(position, branchIndex, time) {
+                // Extract text from branch URL
+                const url = this.branchUrls[branchIndex] || '';
+                let letter = '';
+                
+                if (url) {
+                    // Extract the last path segment from URL
+                    const pathMatch = url.match(/\/([^\/]+)\/?$/);
+                    if (pathMatch) {
+                        letter = pathMatch[1]; // Get the captured group (path name)
+                    } else if (url.startsWith('http')) {
+                        // For external URLs, try to extract domain or relevant part
+                        try {
+                            const urlObj = new URL(url);
+                            const hostname = urlObj.hostname;
+                            // Extract meaningful part (e.g., 'github' from 'github.com')
+                            const parts = hostname.split('.');
+                            letter = parts[0] || hostname;
+                        } catch {
+                            letter = 'ext'; // fallback for external links
+                        }
+                    }
+                }
+                
+                // Fallback if no letter extracted
+                if (!letter) {
+                    const fallbackLetters = ['n', 'a', 'f', 'x'];
+                    letter = fallbackLetters[branchIndex % fallbackLetters.length];
+                }
+                
+                // Add floating animation
+                const floatSpeed = 0.002;
+                const floatAmplitude = 10;
+                const phaseOffset = branchIndex * Math.PI / 2;
+                const floatOffset = Math.sin(time * floatSpeed + phaseOffset) * floatAmplitude;
+                
+                // Position the letter above the branch tip
+                const letterX = position.x;
+                const letterY = position.y - 25 + floatOffset;
+                
+                // Add rotation around Y-axis (height axis)
+                const rotationSpeed = 0.001;
+                const rotationAngle = time * rotationSpeed + branchIndex * Math.PI / 2;
+                
+                // Save context for transformation
+                this.ctx.save();
+                
+                // Move to letter position
+                this.ctx.translate(letterX, letterY);
+                
+                // Rotate around the vertical axis (simulated by scaling x)
+                const scaleX = Math.cos(rotationAngle);
+                this.ctx.scale(scaleX, 1);
+                
+                // Adjust font size based on text length
+                const baseFontSize = Math.max(16, 18 * (position.scale || 1));
+                let fontSize = baseFontSize;
+                
+                // Scale down font for longer text
+                if (letter.length > 4) {
+                    fontSize = baseFontSize * 0.7;
+                } else if (letter.length > 2) {
+                    fontSize = baseFontSize * 0.85;
+                }
+                
+                // Thin black letters
+                this.ctx.font = `300 ${fontSize}px Arial`;
+                this.ctx.fillStyle = `rgba(0, 0, 0, ${0.7 * Math.abs(scaleX)})`; // Fade when rotating
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                
+                // Draw the letter at origin (0,0) since we translated
+                this.ctx.fillText(letter, 0, 0);
+                
+                // Restore context
+                this.ctx.restore();
+            }
+
+            draw() {
+                const time = Date.now() - this.startTime;
+                
+                // Update 3D rotation (only in 3D mode)
+                if (this.is3D) {
+                    this.rotationY += this.rotationSpeed;
+                }
+                
+                // Update level cycling for fullscreen mode
+                if (this.isFullscreen) {
+                    const cycleTime = Date.now() - this.levelCycleStart;
+                    const cycleInterval = 5000; // 5 seconds per level
+                    const currentCycle = Math.floor(cycleTime / cycleInterval);
+                    this.currentFullscreenLevel = (currentCycle % 5) + 1; // Cycle between 1, 2, 3, 4, 5
+                }
+                
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.branchPositions.clear();
+                this.clickableAreas = []; // Reset clickable areas
+                this.branchTips = []; // Reset branch tips for letter drawing
+                
+                // Draw fractal tree starting from base position
+                const maxDepthLimit = this.isFullscreen ? this.currentFullscreenLevel : 1;
+                
+                if (this.is3D) {
+                    // 3D mode: use 3D fractal function
+                    this.draw3DFractal(
+                        0, // X centered at origin
+                        0, // Y starts at origin  
+                        0, // Z at origin
+                        1.0, // Full scale for root
+                        0, // Starting depth
+                        maxDepthLimit, // Dynamic depth based on mode
+                        time,
+                        1 // Root fractal ID
+                    );
+                } else {
+                    // 2D mode: use pure 2D fractal function
+                    this.draw2DFractal(
+                        0, // X centered at origin
+                        0, // Y starts at origin
+                        1.0, // Full scale for root
+                        0, // Starting depth
+                        maxDepthLimit, // Dynamic depth based on mode
+                        time,
+                        1 // Root fractal ID
+                    );
+                }
+                
+                // Draw letters after all branches are drawn
+                if (this.branchTips) {
+                    this.branchTips.forEach((tip) => {
+                        this.drawFloatingLetter(tip.position, tip.index, time);
+                    });
+                }
+            }
+            
+            animate() {
+                this.draw();
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+            
+            destroy() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+            
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            new FractalTree('treeCanvas');
+        });
+    </script>
+</body>
+</html>

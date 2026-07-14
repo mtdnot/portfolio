@@ -1,0 +1,284 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f7f9fb;
+    color: #333;
+    line-height: 1.6;
+    font-size: 14px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 60px 80px;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        padding: 40px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+}
+
+/* Section styling - flat layout */
+.section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 60px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .section {
+        margin-bottom: 40px;
+    }
+}
+
+/* Root section special styling */
+.root-section {
+    text-align: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 32px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.fractal-tree {
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.fractal-tree img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.statement {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    color: #555;
+    margin: 0;
+}
+
+/* Typography */
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 24px;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+/* Content layout */
+.content {
+    margin-top: 0;
+}
+
+.field {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    line-height: 1.8;
+}
+
+.label {
+    font-weight: 500;
+    color: #333;
+    min-width: 160px;
+    margin-right: 20px;
+}
+
+.value {
+    color: #666;
+    flex: 1;
+}
+
+/* Projects */
+.project {
+    margin-bottom: 30px;
+    padding: 0;
+    background: transparent;
+}
+
+.project:last-child {
+    margin-bottom: 0;
+}
+
+.project p {
+    color: #666;
+    margin: 8px 0 12px 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.project-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.project-links a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 6px 12px;
+    background: rgba(74, 144, 226, 0.08);
+    border-radius: 4px;
+    border: 1px solid rgba(74, 144, 226, 0.15);
+    transition: all 0.2s ease;
+    font-size: 13px;
+}
+
+.project-links a:hover {
+    background: rgba(74, 144, 226, 0.15);
+    border-color: rgba(74, 144, 226, 0.3);
+}
+
+/* Link Categories */
+.link-category {
+    margin-bottom: 32px;
+}
+
+.link-category:last-child {
+    margin-bottom: 0;
+}
+
+.link-category h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Links */
+.links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.links a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 8px 16px;
+    background: rgba(74, 144, 226, 0.08);
+    border-radius: 6px;
+    border: 1px solid rgba(74, 144, 226, 0.15);
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.links a:hover {
+    background: rgba(74, 144, 226, 0.15);
+    border-color: rgba(74, 144, 226, 0.3);
+}
+
+/* Groups section special styling */
+.section:nth-last-child(2) .content p {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .field {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .label {
+        min-width: auto;
+        margin-bottom: 6px;
+        margin-right: 0;
+        font-weight: 600;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .link-category {
+        margin-bottom: 24px;
+    }
+
+    .link-category h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .links a {
+        text-align: center;
+    }
+    
+    .fractal-tree img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        font-size: 13px;
+    }
+    
+    h2 {
+        font-size: 16px;
+    }
+    
+    .statement {
+        font-size: 14px;
+    }
+    
+    .section {
+        padding: 16px;
+    }
+}
+

@@ -24,7 +24,6 @@ const copyDirContents = (fromDir, toDir) => {
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
-cpSync(join(rootDir, 'index.html'), join(distDir, 'index.html'));
 for (const app of ['personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio']) {
   const appDir = join(rootDir, app);
 
@@ -33,5 +32,10 @@ for (const app of ['personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 
   }
 
   run('npm run build', appDir);
+
+  if (app === 'personal_portfolio') {
+    copyDirContents(join(appDir, 'dist'), distDir);
+  }
+
   copyDirContents(join(appDir, 'dist'), join(distDir, app));
 }

@@ -2,142 +2,14 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url=/personal_portfolio/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
-    <style>
-      :root {
-        --bg: #f3f0ea;
-        --panel: rgba(255, 255, 255, 0.78);
-        --text: #141414;
-        --muted: #666154;
-        --line: rgba(20, 20, 20, 0.12);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(circle at top left, rgba(197, 182, 147, 0.35), transparent 32%),
-          linear-gradient(160deg, #f4f0e7 0%, #ece8df 52%, #e4dfd6 100%);
-      }
-
-      main {
-        width: min(860px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 72px 0 96px;
-      }
-
-      h1 {
-        margin: 0 0 10px;
-        font-size: clamp(2.4rem, 6vw, 4.8rem);
-        font-weight: 600;
-        letter-spacing: 0.04em;
-      }
-
-      p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .grid {
-        margin-top: 40px;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .card {
-        display: block;
-        padding: 22px 20px;
-        border-radius: 20px;
-        border: 1px solid var(--line);
-        background: var(--panel);
-        color: inherit;
-        text-decoration: none;
-        backdrop-filter: blur(14px);
-        transition: transform 160ms ease, border-color 160ms ease;
-      }
-
-      .card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(20, 20, 20, 0.3);
-      }
-
-      .label {
-        display: block;
-        font-size: 0.82rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .name {
-        display: block;
-        margin-top: 12px;
-        font-size: 1.25rem;
-      }
-
-      .path {
-        display: block;
-        margin-top: 8px;
-        color: var(--muted);
-        font-family: "SFMono-Regular", "Menlo", monospace;
-        font-size: 0.86rem;
-      }
-
-      @media (max-width: 760px) {
-        main {
-          padding: 48px 0 64px;
-        }
-
-        .grid {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
+    <title>Redirecting...</title>
+    <script>
+      window.location.replace('/personal_portfolio/');
+    </script>
   </head>
   <body>
-    <main>
-      <h1>portfolio</h1>
-      <p>公開中のポートフォリオ一覧</p>
-
-      <div class="grid">
-        <a class="card" href="/cycletree_portfolio/">
-          <span class="label">CycleTree</span>
-          <span class="name">cycletree_portfolio</span>
-          <span class="path">/cycletree_portfolio/</span>
-        </a>
-
-        <a class="card" href="/personal_portfolio/">
-          <span class="label">Personal</span>
-          <span class="name">personal_portfolio</span>
-          <span class="path">/personal_portfolio/</span>
-        </a>
-
-        <a class="card" href="/works_portfolio/">
-          <span class="label">Works</span>
-          <span class="name">works_portfolio</span>
-          <span class="path">/works_portfolio/</span>
-        </a>
-
-        <a class="card" href="/u-aizu_portfolio/">
-          <span class="label">University</span>
-          <span class="name">u-aizu_portfolio</span>
-          <span class="path">/u-aizu_portfolio/</span>
-        </a>
-
-        <a class="card" href="/tech_portfolio/">
-          <span class="label">Tech</span>
-          <span class="name">tech_portfolio</span>
-          <span class="path">/tech_portfolio/</span>
-        </a>
-      </div>
-    </main>
+    <p><a href="/personal_portfolio/">/personal_portfolio/</a></p>
   </body>
-  </html>
+</html>

@@ -37,11 +37,11 @@ const rewriteFoundPaths = (dir) => {
 
     const source = readFileSync(fullPath, 'utf8');
     const rewritten = source
-      .replaceAll('href="/', 'href="/found/')
-      .replaceAll('src="/', 'src="/found/')
-      .replaceAll("url('/", "url('/found/")
-      .replaceAll('url("/', 'url("/found/')
-      .replaceAll('content="/', 'content="/found/');
+      .replace(/href="\/(?!found\/)/g, 'href="/found/')
+      .replace(/src="\/(?!found\/)/g, 'src="/found/')
+      .replace(/url\('\/(?!found\/)/g, "url('/found/")
+      .replace(/url\("\/(?!found\/)/g, 'url("/found/')
+      .replace(/content="\/(?!found\/)/g, 'content="/found/');
 
     if (rewritten !== source) {
       writeFileSync(fullPath, rewritten);
@@ -61,7 +61,7 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
 
   run('npm run build', appDir);
 
-  if (app === 'cycletree_portfolio') {
+  if (app === 'personal_portfolio') {
     copyDirContents(join(appDir, 'dist'), distDir);
   }
 

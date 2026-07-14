@@ -1,5 +1,5 @@
 {
-  "name": "works-portfolio",
+  "name": "personal-portfolio",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "astro": "^7.0.9"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
   }
 }

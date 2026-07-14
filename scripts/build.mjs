@@ -52,7 +52,7 @@ const rewriteFoundPaths = (dir) => {
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
-for (const app of ['personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio', 'found']) {
+for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio', 'found']) {
   const appDir = join(rootDir, app);
 
   if (!existsSync(join(appDir, 'node_modules'))) {
@@ -61,7 +61,7 @@ for (const app of ['personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 
 
   run('npm run build', appDir);
 
-  if (app === 'personal_portfolio') {
+  if (app === 'cycletree_portfolio') {
     copyDirContents(join(appDir, 'dist'), distDir);
   }
 

@@ -1,10 +1,212 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroScene from '../components/HeroScene.astro';
-import ContentSections from '../components/ContentSections.astro';
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const profile = {
+  name: '松田直和',
+  purpose: '地震の予知システムの開発',
+  hobbies: [
+    '喫茶店とコーヒードリップ',
+    '哲学',
+    'DJ',
+    '配信環境やウェブインフラの整備',
+  ],
+  favoriteStructures: [
+    'Glitchcore',
+    'Surrealism',
+    'フラクタル構造',
+  ],
+  musicGenres: [
+    'DnB',
+    'Bass house',
+    '東方',
+    'industrial',
+    'instrumental(特にピアノや弦)',
+    'Breakcore',
+    'Jungle Terror',
+  ],
+  videos: [
+    { label: 'DJプレイ', href: 'https://www.youtube.com/watch?v=-S9NQbqHDeg' },
+  ],
+  links: [
+    { label: 'Found', href: '/found/' },
+    { label: '索(あなぐる)', href: 'https://blog.mtdnot.dev' },
+  ],
+};
 ---
 
-<BaseLayout>
-  <HeroScene />
-  <ContentSections />
-</BaseLayout>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{profile.name} | personal portfolio</title>
+    <meta
+      name="description"
+      content={`${profile.name}の個人ポートフォリオ。目的、趣味、好きな芸術や音楽、動画リンクをまとめたページ。`}
+    />
+  </head>
+  <body>
+    <main class="page">
+      <section class="profile-block">
+        <h1>Personal Profile</h1>
+
+        <p class="name-line">{profile.name}</p>
+
+        <div class="content-block">
+          <div class="section">
+            <h2># 目的</h2>
+            <ul>
+              <li>{profile.purpose}</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 趣味</h2>
+            <ul>
+              {profile.hobbies.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 好きな芸術 / 構造</h2>
+            <ul>
+              {profile.favoriteStructures.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 好きな音楽ジャンル</h2>
+            <ul>
+              {profile.musicGenres.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 動画</h2>
+            <ul>
+              {profile.videos.map((item) => (
+                <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># Links</h2>
+            <ul>
+              {profile.links.map((item) => (
+                <li><a href={item.href} target={item.href.startsWith('/') ? undefined : '_blank'} rel="noreferrer">{item.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bg: #f8f8f6;
+    --text: #111;
+    --muted: #5c5c5c;
+    --line: #d8d8d3;
+    --accent: #0b57d0;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .profile-block {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .name-line {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .content-block {
+    background: #ecece8;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px 28px;
+  }
+
+  .section + .section {
+    margin-top: 1.4rem;
+  }
+
+  .section h2 {
+    font-size: 1rem;
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+
+  li {
+    line-height: 1.8;
+  }
+
+  @media (max-width: 900px) {
+    .profile-visuals {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 32px 16px 56px;
+    }
+
+    .profile-visuals {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

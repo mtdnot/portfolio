@@ -25,6 +25,23 @@ const profile = {
     label: '索(あなぐる)',
     href: 'https://blog.mtdnot.dev',
   },
+  footerLinks: [
+    {
+      label: '仕事',
+      caption: 'works portfolio',
+      href: '/works_portfolio/',
+    },
+    {
+      label: '技術',
+      caption: 'tech portfolio',
+      href: '/tech_portfolio/',
+    },
+    {
+      label: '大学',
+      caption: 'u-aizu portfolio',
+      href: '/u-aizu_portfolio/',
+    },
+  ],
   contact: 'contact[at]mtdnot.dev',
 };
 ---
@@ -102,6 +119,15 @@ const profile = {
             </ul>
           </div>
         </div>
+
+        <footer class="portfolio-footer">
+          {profile.footerLinks.map((item) => (
+            <a class="footer-card" href={item.href}>
+              <span class="footer-label">{item.label}</span>
+              <span class="footer-caption">{item.caption}</span>
+            </a>
+          ))}
+        </footer>
       </section>
     </main>
   </body>
@@ -195,6 +221,44 @@ const profile = {
     padding: 24px 28px;
   }
 
+  .portfolio-footer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .footer-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #f0f0ec;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 120ms ease, transform 120ms ease, border-color 120ms ease;
+  }
+
+  .footer-card:hover {
+    opacity: 1;
+    background: #e7e7e2;
+    border-color: #c9c9c2;
+    transform: translateY(-1px);
+  }
+
+  .footer-label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-caption {
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+
   .section + .section {
     margin-top: 1.4rem;
   }
@@ -223,6 +287,10 @@ const profile = {
   @media (max-width: 640px) {
     .page {
       padding: 32px 16px 56px;
+    }
+
+    .portfolio-footer {
+      grid-template-columns: 1fr;
     }
 
     .profile-visuals {

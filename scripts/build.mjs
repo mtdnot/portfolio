@@ -25,12 +25,7 @@ rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
 cpSync(join(rootDir, 'index.html'), join(distDir, 'index.html'));
-cpSync(join(rootDir, 'personal_portfolio'), join(distDir, 'personal_portfolio'), {
-  recursive: true,
-  filter: (source) => !source.includes('/.git') && !source.endsWith('index.html~') && !source.includes('/.github'),
-});
-
-for (const app of ['works_portfolio', 'u-aizu_portfolio']) {
+for (const app of ['personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio']) {
   const appDir = join(rootDir, app);
 
   if (!existsSync(join(appDir, 'node_modules'))) {

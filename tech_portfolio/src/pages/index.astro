@@ -4,30 +4,20 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   : `${import.meta.env.BASE_URL}/`;
 
 const profile = {
-  name: '松田直和',
-  handle: 'ナツ',
-  icon: 'https://portfolio.mtdnot.dev/personal_portfolio/photo.jpg',
-  affiliation: '会津大学 学部2年(33期)',
-  studentId: 's1330019',
-  className: 'C1',
-  laboratory: '未定',
-  researchTopics: [
-    '地震の前兆現象の分析',
+  name: 'mtdnot',
+  os: 'NixOS',
+  editors: [
+    'Emacs',
   ],
-  circles: [
-    'Zli',
-    'DMC',
-  ],
-  boasts: ['1年間で67単位とった'],
   sns: [
-    { label: 'Twitter', href: 'https://x.com/mtdnot' },
     { label: 'GitHub', href: 'https://github.com/mtdnot/' },
-    { label: '論文サイト(mock)', href: '#' },
+    { label: 'SpeakerDeck', href: 'https://speakerdeck.com/mtdnot' },
   ],
-  contacts: [
-    { label: 'contact[at]mtdnot.dev' },
-    { label: 'Twitter | @mtdnot', href: 'https://x.com/mtdnot' },
-  ],
+  blog: {
+    label: '索(あなぐる)',
+    href: 'https://blog.mtdnot.dev',
+  },
+  contact: 'contact[at]mtdnot.dev',
 };
 ---
 
@@ -36,83 +26,55 @@ const profile = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{profile.name} | u-aizu portfolio</title>
+    <title>{profile.name} | tech portfolio</title>
     <meta
       name="description"
-      content={`${profile.name}の大学向けプロフィール。所属、研究テーマ、SNS、連絡先をまとめたページ。`}
+      content={`${profile.name}の技術ポートフォリオ。好きなOS、エディタ、SNS、ブログ、連絡先をまとめたページ。`}
     />
   </head>
   <body>
     <main class="page">
       <section class="profile-block">
-        <h1>U-Aizu Profile</h1>
+        <h1>Tech Profile</h1>
 
         <div class="profile-visuals">
-          <img src={profile.icon} alt={`${profile.name}のアイコン`} class="portrait-image" />
+          <img src={`${base}images/icon.png`} alt={`${profile.name}のアイコン`} class="portrait-image" />
         </div>
 
-        <p class="name-line">
-          {profile.name}
-          <span class="handle">({profile.handle})</span>
-        </p>
+        <p class="name-line">{profile.name}</p>
+
+        <p class="mail">[mail] {profile.contact}</p>
 
         <div class="content-block">
           <div class="section">
-            <h2># Basic</h2>
+            <h2># Environment</h2>
             <ul>
-              <li>所属 : {profile.affiliation}</li>
-              <li>学籍番号 : {profile.studentId}</li>
-              <li>クラス : {profile.className}</li>
-              <li>研究室 : {profile.laboratory}</li>
+              <li>好きなOS : {profile.os}</li>
             </ul>
           </div>
 
           <div class="section">
-            <h2># 研究テーマ</h2>
+            <h2># Editor</h2>
             <ul>
-              {profile.researchTopics.map((item) => (
+              {profile.editors.map((item) => (
                 <li>{item}</li>
               ))}
             </ul>
           </div>
 
           <div class="section">
-            <h2># サークル</h2>
-            <ul>
-              {profile.circles.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="section">
-            <h2># 自慢</h2>
-            <ul>
-              {profile.boasts.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="section">
-            <h2># SNS</h2>
+            <h2># Social</h2>
             <ul>
               {profile.sns.map((item) => (
-                <li>
-                  {item.href === '#' ? item.label : <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>}
-                </li>
+                <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>
               ))}
             </ul>
           </div>
 
           <div class="section">
-            <h2># 連絡</h2>
+            <h2># Blog</h2>
             <ul>
-              {profile.contacts.map((item) => (
-                <li>
-                  {item.href ? <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a> : item.label}
-                </li>
-              ))}
+              <li><a href={profile.blog.href} target="_blank" rel="noreferrer">{profile.blog.label}</a></li>
             </ul>
           </div>
         </div>

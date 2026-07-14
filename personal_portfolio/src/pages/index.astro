@@ -75,7 +75,7 @@ const profile = {
           <div class="section">
             <h2># 目的</h2>
             <ul>
-              <li>{profile.purpose}</li>
+              <li><span class="redacted-text">{profile.purpose}</span></li>
             </ul>
           </div>
 
@@ -234,6 +234,19 @@ const profile = {
   .footer-caption {
     font-size: 0.86rem;
     color: var(--muted);
+  }
+
+  .redacted-text {
+    display: inline-block;
+    padding: 0.04em 0.35em;
+    border-radius: 0.22em;
+    background: #111;
+    color: #111;
+    user-select: none;
+  }
+
+  .redacted-text:hover {
+    color: #f8f8f6;
   }
 
   .section + .section {

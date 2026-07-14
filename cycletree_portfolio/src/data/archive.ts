@@ -12,8 +12,8 @@ export const archiveSections = [
     title: 'Articles / Presentations',
     type: 'links',
     items: [
-      { label: 'Intro myself LT →', href: 'https://apps.mtdnot.dev/intromyselfLTrevealjs/' },
-      { label: '大LT →', href: 'https://apps.mtdnot.dev/%E5%A4%A7LTrevealjs4up/#/' },
+      { label: 'Intro myself LT →', href: 'https://apps.mtdnot.dev/apps/intromyselfLTrevealjs/' },
+      { label: '大LT →', href: 'https://apps.mtdnot.dev/apps/%E5%A4%A7LTrevealjs4up/#/' },
     ],
   },
   {

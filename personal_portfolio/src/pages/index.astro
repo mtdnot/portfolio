@@ -33,6 +33,10 @@ const profile = {
     label: '索(あなぐる)',
     href: 'https://blog.mtdnot.dev',
   },
+  floatingGif: {
+    src: 'https://images.steamusercontent.com/ugc/959733232046536804/EB2DA2DA300F1CCCBA2AB6A59447F2B3E24B620A/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false',
+    alt: 'decorative animated image',
+  },
   footerLinks: [
     {
       label: '個人',
@@ -72,7 +76,7 @@ const profile = {
   <body>
     <main class="page">
       <section class="profile-block">
-        <h1>Personal Profile</h1>
+        <h1>Personal</h1>
 
         <p class="name-line">{profile.name}</p>
 
@@ -138,6 +142,13 @@ const profile = {
         </footer>
       </section>
     </main>
+
+    <img
+      src={profile.floatingGif.src}
+      alt={profile.floatingGif.alt}
+      class="floating-gif"
+      loading="lazy"
+    />
   </body>
 </html>
 
@@ -262,6 +273,19 @@ const profile = {
     color: #f8f8f6;
   }
 
+  .floating-gif {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: min(24vw, 220px);
+    max-width: 38vw;
+    height: auto;
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+    image-rendering: auto;
+  }
+
   .section + .section {
     margin-top: 1.4rem;
   }
@@ -299,6 +323,13 @@ const profile = {
     .profile-visuals {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .floating-gif {
+      right: 10px;
+      bottom: 10px;
+      width: min(34vw, 144px);
+      opacity: 0.92;
     }
   }
 </style>

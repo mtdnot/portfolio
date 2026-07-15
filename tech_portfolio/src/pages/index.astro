@@ -48,6 +48,12 @@ const profile = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <title>{profile.name} | tech portfolio</title>
     <meta
       name="description"
@@ -130,7 +136,7 @@ const profile = {
   }
 
   body {
-    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    font-family: "IBM Plex Sans", "Hiragino Sans", "Noto Sans JP", sans-serif;
     background: var(--bg);
     color: var(--text);
   }
@@ -160,6 +166,7 @@ const profile = {
     font-size: 2.1rem;
     margin-bottom: 1.5rem;
     font-weight: 600;
+    letter-spacing: 0.04em;
     text-align: center;
   }
 
@@ -192,6 +199,7 @@ const profile = {
 
   .mail {
     margin-bottom: 0.7rem;
+    font-family: "IBM Plex Mono", monospace;
     text-align: center;
   }
 
@@ -248,6 +256,7 @@ const profile = {
     font-size: 1rem;
     margin-bottom: 0.45rem;
     font-weight: 600;
+    letter-spacing: 0.08em;
   }
 
   ul {
@@ -257,6 +266,10 @@ const profile = {
 
   li {
     line-height: 1.8;
+  }
+
+  .footer-caption {
+    font-family: "IBM Plex Mono", monospace;
   }
 
   @media (max-width: 900px) {

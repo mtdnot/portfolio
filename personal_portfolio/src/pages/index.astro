@@ -102,75 +102,76 @@ const profile = {
           />
         </div>
 
-        <div class="content-block">
-          <div class="content-primary">
-            <div class="content-main">
-              <div class="section">
-                <h2># 目的</h2>
-                <ul>
-                  <li><span class="redacted-text">{profile.purpose}</span></li>
-                </ul>
+        <div class="content-shell">
+          <img
+            src={`${base}images/theway.jpg`}
+            alt="theway artwork"
+            class="side-artwork side-artwork-left"
+            loading="lazy"
+          />
+
+          <div class="content-block">
+            <div class="content-primary">
+              <div class="content-main">
+                <div class="section">
+                  <h2># 目的</h2>
+                  <ul>
+                    <li><span class="redacted-text">{profile.purpose}</span></li>
+                  </ul>
+                </div>
+
+                <div class="section">
+                  <h2># 趣味</h2>
+                  <ul>
+                    {profile.hobbies.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="section">
+                  <h2># 好きな芸術 / 構造</h2>
+                  <ul>
+                    {profile.favoriteStructures.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="section">
+                  <h2># 好きな音楽ジャンル</h2>
+                  <ul>
+                    {profile.musicGenres.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
               <div class="section">
-                <h2># 趣味</h2>
+                <h2># 動画</h2>
                 <ul>
-                  {profile.hobbies.map((item) => (
-                    <li>{item}</li>
+                  {profile.videos.map((item) => (
+                    <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>
                   ))}
                 </ul>
               </div>
 
               <div class="section">
-                <h2># 好きな芸術 / 構造</h2>
+                <h2># Blog</h2>
                 <ul>
-                  {profile.favoriteStructures.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div class="section">
-                <h2># 好きな音楽ジャンル</h2>
-                <ul>
-                  {profile.musicGenres.map((item) => (
-                    <li>{item}</li>
-                  ))}
+                  <li><a href={profile.blog.href} target="_blank" rel="noreferrer">{profile.blog.label}</a></li>
                 </ul>
               </div>
             </div>
-
-            <aside class="content-artwork">
-              <img
-                src={`${base}images/theway.jpg`}
-                alt="theway artwork"
-                class="artwork-image"
-                loading="lazy"
-              />
-              <img
-                src={`${base}images/shrine.jpg`}
-                alt="shrine artwork"
-                class="artwork-image"
-                loading="lazy"
-              />
-            </aside>
           </div>
 
-          <div class="section">
-            <h2># 動画</h2>
-            <ul>
-              {profile.videos.map((item) => (
-                <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="section">
-            <h2># Blog</h2>
-            <ul>
-              <li><a href={profile.blog.href} target="_blank" rel="noreferrer">{profile.blog.label}</a></li>
-            </ul>
-          </div>
+          <img
+            src={`${base}images/shrine.jpg`}
+            alt="shrine artwork"
+            class="side-artwork side-artwork-right"
+            loading="lazy"
+          />
         </div>
 
         <footer class="portfolio-footer">
@@ -318,6 +319,13 @@ const profile = {
     flex-shrink: 0;
   }
 
+  .content-shell {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    gap: 18px;
+    align-items: start;
+  }
+
   .content-block {
     background: rgba(241, 247, 252, 0.84);
     backdrop-filter: blur(3px);
@@ -328,31 +336,18 @@ const profile = {
   }
 
   .content-primary {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 380px;
-    gap: 24px;
-    align-items: start;
+    display: block;
   }
 
-  .content-main {
-    min-width: 0;
-  }
-
-  .content-artwork {
-    display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-  }
-
-  .artwork-image {
+  .side-artwork {
     width: 100%;
-    max-width: 182px;
     height: auto;
     display: block;
     border: 1px solid var(--line);
     border-radius: 16px;
     object-fit: cover;
     box-shadow: 0 12px 24px rgba(71, 104, 136, 0.18);
+    align-self: stretch;
   }
 
   .portfolio-footer {
@@ -460,13 +455,13 @@ const profile = {
       grid-template-columns: 1fr;
     }
 
-    .content-artwork {
-      justify-content: center;
-      flex-wrap: wrap;
+    .content-shell {
+      grid-template-columns: 1fr;
     }
 
-    .artwork-image {
-      max-width: 190px;
+    .side-artwork {
+      max-width: 220px;
+      margin: 0 auto;
     }
 
     .hero {

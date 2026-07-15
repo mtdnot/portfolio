@@ -155,11 +155,13 @@ const profile = {
   }
 
   :root {
-    --bg: #f8f8f6;
-    --text: #111;
-    --muted: #5c5c5c;
-    --line: #d8d8d3;
-    --accent: #0b57d0;
+    --bg: #060b14;
+    --panel: #0d1627;
+    --panel-strong: #101d34;
+    --text: #edf4ff;
+    --muted: #8fa4c5;
+    --line: #1f3558;
+    --accent: #5fa8ff;
   }
 
   * {
@@ -170,7 +172,9 @@ const profile = {
 
   body {
     font-family: "SmartFontUI", "Hiragino Sans", "Noto Sans JP", sans-serif;
-    background: var(--bg);
+    background:
+      radial-gradient(circle at top, rgba(78, 133, 224, 0.16) 0%, rgba(78, 133, 224, 0) 32%),
+      linear-gradient(180deg, #08101c 0%, var(--bg) 100%);
     color: var(--text);
   }
 
@@ -217,6 +221,7 @@ const profile = {
     object-fit: cover;
     display: block;
     border: 1px solid var(--line);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
   }
 
   .name-line {
@@ -235,10 +240,11 @@ const profile = {
   }
 
   .content-block {
-    background: #ecece8;
+    background: rgba(13, 22, 39, 0.92);
     border: 1px solid var(--line);
     border-radius: 18px;
     padding: 24px 28px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
   }
 
   .portfolio-footer {
@@ -255,7 +261,7 @@ const profile = {
     padding: 16px 18px;
     border: 1px solid var(--line);
     border-radius: 16px;
-    background: #f0f0ec;
+    background: rgba(16, 29, 52, 0.92);
     color: var(--text);
     text-decoration: none;
     transition: background 120ms ease, transform 120ms ease, border-color 120ms ease;
@@ -263,8 +269,8 @@ const profile = {
 
   .footer-card:hover {
     opacity: 1;
-    background: #e7e7e2;
-    border-color: #c9c9c2;
+    background: #152542;
+    border-color: #2f4f83;
     transform: translateY(-1px);
   }
 

@@ -13,7 +13,12 @@ const profile = {
     { label: 'Frexida', href: '#' },
   ],
   achievements: [
-    '2026年度アオタケプロジェクトに採択',
+    {
+      prefix: '2026年度',
+      label: 'アオタケプロジェクト',
+      href: 'https://aizu-startups-foundation.com/aotake/top',
+      suffix: 'に採択',
+    },
   ],
   sns: [
     { label: 'GitHub', href: 'https://github.com/mtdnot/' },
@@ -103,7 +108,9 @@ const profile = {
             <h2># 実績</h2>
             <ul>
               {profile.achievements.map((item) => (
-                <li>{item}</li>
+                <li>
+                  {item.prefix}<a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>{item.suffix}
+                </li>
               ))}
             </ul>
           </div>

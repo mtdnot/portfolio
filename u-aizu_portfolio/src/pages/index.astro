@@ -57,6 +57,12 @@ const profile = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <title>{profile.name} | u-aizu portfolio</title>
     <meta
       name="description"
@@ -159,7 +165,7 @@ const profile = {
   }
 
   body {
-    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    font-family: "IBM Plex Sans", "Hiragino Sans", "Noto Sans JP", sans-serif;
     background: var(--bg);
     color: var(--text);
   }
@@ -265,6 +271,7 @@ const profile = {
   }
 
   .footer-caption {
+    font-family: "IBM Plex Mono", monospace;
     font-size: 0.86rem;
     color: var(--muted);
   }
@@ -287,6 +294,7 @@ const profile = {
   }
 
   .section h2 {
+    font-family: "IBM Plex Mono", monospace;
     font-size: 1rem;
     margin-bottom: 0.45rem;
     font-weight: 600;

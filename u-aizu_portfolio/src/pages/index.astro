@@ -15,8 +15,8 @@ const profile = {
     '地震の前兆現象の分析',
   ],
   circles: [
-    'Zli',
-    'DMC',
+    { label: 'Zli（技術コミュニティ）', href: 'https://zli.works' },
+    { label: 'DMC（DJ）', href: 'https://aizudmc123.web.app' },
   ],
   sns: [
     { label: 'Twitter', href: 'https://x.com/mtdnot' },
@@ -101,7 +101,7 @@ const profile = {
             <h2># サークル</h2>
             <ul>
               {profile.circles.map((item) => (
-                <li>{item}</li>
+                <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>
               ))}
             </ul>
           </div>

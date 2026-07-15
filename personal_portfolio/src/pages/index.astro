@@ -75,6 +75,12 @@ const profile = {
   </head>
   <body>
     <div
+      class="heaven-backdrop"
+      aria-hidden="true"
+      style={`--heaven-image: url('${base}images/heaven.jpg')`}
+    ></div>
+
+    <div
       class="sky-backdrop"
       aria-hidden="true"
       style={`--cloud-strip: url('${base}images/clouds-loop.jpeg')`}
@@ -141,6 +147,12 @@ const profile = {
                 class="artwork-image"
                 loading="lazy"
               />
+              <img
+                src={`${base}images/shrine.jpg`}
+                alt="shrine artwork"
+                class="artwork-image"
+                loading="lazy"
+              />
             </aside>
           </div>
 
@@ -202,13 +214,27 @@ const profile = {
 
   body {
     font-family: "BestTenDOT", "Hiragino Sans", "Noto Sans JP", sans-serif;
-    background:
-      linear-gradient(180deg, rgba(255, 244, 222, 0.52) 0%, rgba(255, 244, 222, 0) 22%),
-      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 52%, var(--sky-low) 100%);
+    background: linear-gradient(180deg, rgba(90, 174, 255, 0.16) 0%, rgba(213, 239, 255, 0.06) 100%);
     color: var(--text);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+  }
+
+  .heaven-backdrop {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image:
+      linear-gradient(180deg, rgba(255, 245, 220, 0.14) 0%, rgba(255, 245, 220, 0) 24%),
+      linear-gradient(180deg, rgba(107, 183, 255, 0.18) 0%, rgba(107, 183, 255, 0.08) 46%, rgba(213, 239, 255, 0.08) 100%),
+      var(--heaven-image);
+    background-position: center, center, center;
+    background-size: cover, cover, cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    transform: scale(1.03);
   }
 
   .sky-backdrop {
@@ -303,7 +329,7 @@ const profile = {
 
   .content-primary {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-template-columns: minmax(0, 1fr) 380px;
     gap: 24px;
     align-items: start;
   }
@@ -315,11 +341,12 @@ const profile = {
   .content-artwork {
     display: flex;
     justify-content: flex-end;
+    gap: 16px;
   }
 
   .artwork-image {
     width: 100%;
-    max-width: 220px;
+    max-width: 182px;
     height: auto;
     display: block;
     border: 1px solid var(--line);
@@ -435,10 +462,11 @@ const profile = {
 
     .content-artwork {
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .artwork-image {
-      max-width: 180px;
+      max-width: 190px;
     }
 
     .hero {

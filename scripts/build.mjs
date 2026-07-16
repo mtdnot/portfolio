@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -33,6 +33,18 @@ const copyFoundToRoot = (fromDir, toDir) => {
   }
 };
 
+const writePagesRoutingFiles = (toDir) => {
+  writeFileSync(
+    join(toDir, '404.html'),
+    '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>404</title></head><body><h1>404</h1></body></html>',
+  );
+
+  writeFileSync(
+    join(toDir, '_redirects'),
+    '/found /404.html 404\n/found/* /404.html 404\n',
+  );
+};
+
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
@@ -62,3 +74,5 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
 
   copyDirContents(join(appDir, 'dist'), join(distDir, app));
 }
+
+writePagesRoutingFiles(distDir);

@@ -1,5 +1,5 @@
 export const identityLinks = [
-  { label: 'ANAG', href: '/found/anag/' },
-  { label: 'Refixa', href: '/found/refixa/' },
-  { label: 'Personal', href: 'https://mtdnot.dev/' },
+  { label: 'ANAG', href: '/anag/' },
+  { label: 'Refixa', href: '/refixa/' },
+  { label: 'Personal', href: '/mtdnot/' },
 ] as const;

@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -21,56 +21,15 @@ const copyDirContents = (fromDir, toDir) => {
   }
 };
 
-const rewriteFoundPaths = (dir) => {
-  for (const entry of readdirSync(dir)) {
-    const fullPath = join(dir, entry);
-    const stats = statSync(fullPath);
+const copyFoundToRoot = (fromDir, toDir) => {
+  mkdirSync(toDir, { recursive: true });
 
-    if (stats.isDirectory()) {
-      rewriteFoundPaths(fullPath);
+  for (const entry of readdirSync(fromDir)) {
+    if (entry === 'index.html') {
       continue;
     }
 
-    if (!/\.(html|css|js)$/.test(entry)) {
-      continue;
-    }
-
-    const source = readFileSync(fullPath, 'utf8');
-    const rewritten = source
-      .replace(/href="\/(?!found\/)/g, 'href="/found/')
-      .replace(/src="\/(?!found\/)/g, 'src="/found/')
-      .replace(/url\('\/(?!found\/)/g, "url('/found/")
-      .replace(/url\("\/(?!found\/)/g, 'url("/found/')
-      .replace(/content="\/(?!found\/)/g, 'content="/found/');
-
-    if (rewritten !== source) {
-      writeFileSync(fullPath, rewritten);
-    }
-  }
-};
-
-const rewriteFontPaths = (dir) => {
-  for (const entry of readdirSync(dir)) {
-    const fullPath = join(dir, entry);
-    const stats = statSync(fullPath);
-
-    if (stats.isDirectory()) {
-      rewriteFontPaths(fullPath);
-      continue;
-    }
-
-    if (!/\.(html|css|js)$/.test(entry)) {
-      continue;
-    }
-
-    const source = readFileSync(fullPath, 'utf8');
-    const rewritten = source
-      .replace(/\/personal_portfolio\/fonts\//g, '/fonts/')
-      .replace(/\/works_portfolio\/fonts\//g, '/fonts/');
-
-    if (rewritten !== source) {
-      writeFileSync(fullPath, rewritten);
-    }
+    cpSync(join(fromDir, entry), join(toDir, entry), { recursive: true });
   }
 };
 
@@ -96,9 +55,10 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
     copyDirContents(join(appDir, 'dist'), distDir);
   }
 
-  copyDirContents(join(appDir, 'dist'), join(distDir, app));
-
   if (app === 'found') {
-    rewriteFoundPaths(join(distDir, 'found'));
+    copyFoundToRoot(join(appDir, 'dist'), distDir);
+    continue;
   }
+
+  copyDirContents(join(appDir, 'dist'), join(distDir, app));
 }

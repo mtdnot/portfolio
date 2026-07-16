@@ -113,13 +113,6 @@ const profile = {
             <div class="content-primary">
               <div class="content-main">
                 <div class="section">
-                  <h2># 目的</h2>
-                  <ul>
-                    <li><span class="redacted-text" aria-label="redacted"></span></li>
-                  </ul>
-                </div>
-
-                <div class="section">
                   <h2># 趣味</h2>
                   <ul>
                     {profile.hobbies.map((item) => (
@@ -412,16 +405,6 @@ const profile = {
   .footer-caption {
     font-size: 0.86rem;
     color: var(--muted);
-  }
-
-  .redacted-text {
-    display: inline-block;
-    width: 13.5em;
-    height: 1.2em;
-    border-radius: 0.22em;
-    background: #111;
-    user-select: none;
-    vertical-align: middle;
   }
 
   .section + .section {

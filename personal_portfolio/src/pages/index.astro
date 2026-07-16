@@ -90,7 +90,7 @@ const profile = {
         <div class="hero">
           <div class="hero-copy">
             <h1>Personal</h1>
-            <p class="name-line">{profile.name}</p>
+            <p class="name-line"><a href="https://cycletree.org/">{profile.name}</a></p>
           </div>
 
           <img
@@ -102,12 +102,14 @@ const profile = {
         </div>
 
         <div class="content-shell">
-          <img
-            src={`${base}images/theway.jpg`}
-            alt="theway artwork"
-            class="side-artwork side-artwork-left"
-            loading="lazy"
-          />
+          <a href="https://cycletree.org/mtdnot/" class="side-artwork-link">
+            <img
+              src={`${base}images/theway.jpg`}
+              alt="theway artwork"
+              class="side-artwork side-artwork-left"
+              loading="lazy"
+            />
+          </a>
 
           <div class="content-block">
             <div class="content-primary">
@@ -185,6 +187,10 @@ const profile = {
     </main>
   </body>
 </html>
+
+<script is:inline>
+  console.log('age quod agis...');
+</script>
 
 <style>
   @font-face {
@@ -311,6 +317,15 @@ const profile = {
     text-align: center;
   }
 
+  .name-line a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .name-line a:hover {
+    opacity: 0.72;
+  }
+
   .hero-gif {
     width: min(22vw, 180px);
     max-width: 32vw;
@@ -347,6 +362,10 @@ const profile = {
     object-fit: cover;
     box-shadow: 0 12px 24px rgba(71, 104, 136, 0.18);
     align-self: stretch;
+  }
+
+  .side-artwork-link {
+    display: block;
   }
 
   .portfolio-footer {

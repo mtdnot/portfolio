@@ -335,9 +335,10 @@ const profile = {
 
   .content-shell {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    grid-template-columns: 182px minmax(0, 1fr) 182px;
     gap: 18px;
     align-items: start;
+    justify-content: center;
   }
 
   .content-block {
@@ -354,7 +355,8 @@ const profile = {
   }
 
   .side-artwork {
-    width: 100%;
+    width: 182px;
+    max-width: 182px;
     height: auto;
     display: block;
     border: 1px solid var(--line);
@@ -366,7 +368,7 @@ const profile = {
 
   .side-artwork-link {
     display: block;
-    width: 100%;
+    width: 182px;
   }
 
   .side-artwork-link:hover {

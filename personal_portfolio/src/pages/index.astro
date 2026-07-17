@@ -67,6 +67,9 @@ const profile = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{profile.name} | personal portfolio</title>
+    <link rel="icon" type="image/png" href={`${base}images/icon.png`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}images/icon.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${base}images/icon.png`} />
     <meta
       name="description"
       content={`${profile.name}の個人ポートフォリオ。目的、趣味、好きな芸術や音楽、動画リンクをまとめたページ。`}
@@ -85,13 +88,13 @@ const profile = {
       style={`--cloud-strip: url('${base}images/clouds-loop.jpeg')`}
     ></div>
 
-    <main class="page">
-      <section class="profile-block">
-        <div class="hero">
     <div class="not-layer" aria-hidden="true">
       <div class="not-stream"></div>
     </div>
 
+    <main class="page">
+      <section class="profile-block">
+        <div class="hero">
           <div class="hero-copy">
             <h1><a href="https://cycletree.org/mtdnot/">mtdnot</a></h1>
             <p class="name-line"><a href="https://cycletree.org/">{profile.name}</a></p>
@@ -185,9 +188,6 @@ const profile = {
 
 <script is:inline>
   console.log('age quod agis...');
-</script>
-
-<style>
 
   const notStream = document.querySelector('.not-stream');
   if (notStream) {
@@ -204,6 +204,9 @@ const profile = {
     appendNot();
     window.setInterval(appendNot, 500);
   }
+</script>
+
+<style>
   @font-face {
     font-family: "BestTenDOT";
     src: url("/fonts/bestten-dot.otf") format("opentype");
@@ -278,9 +281,6 @@ const profile = {
     animation: cloud-strip-loop 18s linear infinite;
   }
 
-  a {
-    color: var(--accent);
-    text-decoration: underline;
   .not-layer {
     position: fixed;
     inset: 0;
@@ -309,6 +309,9 @@ const profile = {
     white-space: nowrap;
   }
 
+  a {
+    color: var(--accent);
+    text-decoration: underline;
     text-underline-offset: 0.15em;
   }
 
@@ -501,9 +504,6 @@ const profile = {
   }
 
   @media (max-width: 640px) {
-    .page {
-      padding: 24px 10px 40px;
-    }
     .not-layer {
       padding: 14px 12px;
     }
@@ -513,6 +513,9 @@ const profile = {
       font-size: 0.95rem;
     }
 
+    .page {
+      padding: 24px 10px 40px;
+    }
 
     .hero {
       gap: 10px;

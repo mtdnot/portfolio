@@ -95,6 +95,13 @@ const profile = {
     <main class="page">
       <section class="profile-block">
         <div class="hero">
+          <img
+            src={`${base}images/image0718.png`}
+            alt="decorative image"
+            class="hero-side-image"
+            loading="lazy"
+          />
+
           <div class="hero-copy">
             <h1><a href="https://cycletree.org/mtdnot/">mtdnot</a></h1>
             <p class="name-line"><a href="https://cycletree.org/">{profile.name}</a></p>
@@ -384,6 +391,14 @@ const profile = {
     flex-shrink: 0;
   }
 
+  .hero-side-image {
+    width: min(18vw, 140px);
+    max-width: 140px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
   .content-shell {
     display: flex;
     justify-content: center;
@@ -533,6 +548,11 @@ const profile = {
     .hero-gif {
       width: min(24vw, 96px);
       max-width: 96px;
+    }
+
+    .hero-side-image {
+      width: min(20vw, 84px);
+      max-width: 84px;
     }
 
     .content-shell {

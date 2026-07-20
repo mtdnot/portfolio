@@ -10,7 +10,7 @@ const routeMap = {
   personal_portfolio: 'personal_portfolio',
   works_portfolio: 'works',
   'u-aizu_portfolio': 'u-aizu',
-  tech_portfolio: 'tech_portfolio',
+  tech_portfolio: 'tech',
 };
 
 const run = (command, cwd) => {

@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  base: '/tech_portfolio',
+  base: '/tech',
   output: 'static',
   devToolbar: {
     enabled: false

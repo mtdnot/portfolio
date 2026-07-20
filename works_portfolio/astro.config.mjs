@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  base: '/works_portfolio',
+  base: '/works',
   output: 'static',
   devToolbar: {
     enabled: false

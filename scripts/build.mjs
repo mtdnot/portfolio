@@ -5,6 +5,13 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = join(rootDir, 'dist');
+const routeMap = {
+  cycletree_portfolio: 'cycletree_portfolio',
+  personal_portfolio: 'personal_portfolio',
+  works_portfolio: 'works',
+  'u-aizu_portfolio': 'u-aizu',
+  tech_portfolio: 'tech_portfolio',
+};
 
 const run = (command, cwd) => {
   execSync(command, {
@@ -51,7 +58,7 @@ mkdirSync(distDir, { recursive: true });
 if (existsSync(join(rootDir, 'fonts'))) {
   copyDirContents(join(rootDir, 'fonts'), join(distDir, 'fonts'));
   copyDirContents(join(rootDir, 'fonts'), join(distDir, 'personal_portfolio', 'fonts'));
-  copyDirContents(join(rootDir, 'fonts'), join(distDir, 'works_portfolio', 'fonts'));
+  copyDirContents(join(rootDir, 'fonts'), join(distDir, 'works', 'fonts'));
 }
 
 for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio', 'found']) {
@@ -72,7 +79,7 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
     continue;
   }
 
-  copyDirContents(join(appDir, 'dist'), join(distDir, app));
+  copyDirContents(join(appDir, 'dist'), join(distDir, routeMap[app]));
 }
 
 writePagesRoutingFiles(distDir);

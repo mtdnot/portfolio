@@ -1,5 +1,5 @@
 ---
-import { identityLinks } from '../data/profile';
+import { externalLinks, identityLinks } from '../data/profile';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -16,6 +16,17 @@ const base = import.meta.env.BASE_URL.endsWith('/')
               <a href={item.href} target={item.href.startsWith('/') ? undefined : '_blank'} rel="noopener noreferrer">{item.label}</a>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>リンク</h2>
+      <div class="content">
+        <div class="links identity-links">
+          {externalLinks.map((item) => (
+            <a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a>
+          ))}
         </div>
       </div>
     </section>

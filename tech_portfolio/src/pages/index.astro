@@ -6,6 +6,10 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 const profile = {
   name: 'mtdnot',
   os: 'NixOS',
+  specialties: [
+    'MAS',
+    '組織論',
+  ],
   editors: [
     'Emacs',
   ],
@@ -88,6 +92,15 @@ const profile = {
             <h2># Editor</h2>
             <ul>
               {profile.editors.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2># 得意分野</h2>
+            <ul>
+              {profile.specialties.map((item) => (
                 <li>{item}</li>
               ))}
             </ul>

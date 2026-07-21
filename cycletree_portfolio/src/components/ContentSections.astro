@@ -1,5 +1,5 @@
 ---
-import { externalLinks, identityLinks } from '../data/profile';
+import { externalLinks, identityLinks, moeCounter } from '../data/profile';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -30,5 +30,24 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         </div>
       </div>
     </section>
+
+    <section class="section">
+      <h2>Moe Counter!</h2>
+      <div class="content counter-content">
+        <img src={moeCounter.src} alt={moeCounter.alt} loading="lazy" class="moe-counter" />
+      </div>
+    </section>
   </div>
 </div>
+
+<style>
+  .counter-content {
+    justify-content: center;
+  }
+
+  .moe-counter {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

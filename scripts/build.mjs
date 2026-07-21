@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = join(rootDir, 'dist');
 const routeMap = {
-  cycletree_portfolio: 'cycletree_portfolio',
+  cycletree_portfolio: 'cycletree',
   personal_portfolio: 'personal_portfolio',
   works_portfolio: 'works',
   'u-aizu_portfolio': 'u-aizu',

@@ -3,17 +3,9 @@ export const archiveSections = [
     title: 'Apps',
     type: 'links',
     items: [
-      { label: 'AI chat with live2d →', href: 'https://apps.mtdnot.dev/chat/' },
-      { label: 'chart8（三重県内の医療と過疎） →', href: 'https://apps.mtdnot.dev/chart8/' },
-      { label: 'wordcounter →', href: 'https://apps.mtdnot.dev/wordcounter/' },
-    ],
-  },
-  {
-    title: 'Articles / Presentations',
-    type: 'links',
-    items: [
-      { label: 'Intro myself LT →', href: 'https://apps.mtdnot.dev/apps/intromyselfLTrevealjs/' },
-      { label: '大LT →', href: 'https://apps.mtdnot.dev/apps/%E5%A4%A7LTrevealjs4up/#/' },
+      { label: 'AI chat with live2d →', href: 'https://apps.mtdnot.dev/apps/chat/' },
+      { label: 'chart8（三重県内の医療と過疎） →', href: 'https://apps.mtdnot.dev/apps/chart8/' },
+      { label: 'wordcounter →', href: 'https://apps.mtdnot.dev/apps/wordcounter/' },
     ],
   },
   {
@@ -43,6 +35,8 @@ export const archiveSections = [
   {
     title: 'Other',
     type: 'links',
-    items: [{ label: 'NCC →', href: 'https://apps.mtdnot.dev/ncc/' }],
+    items: [
+      { label: 'NCC →', href: 'https://apps.mtdnot.dev/apps/ncc/' },
+    ],
   },
 ] as const;

@@ -20,11 +20,6 @@ export async function onRequest(context) {
     return context.next(new Request(url, context.request));
   }
 
-  if (url.pathname === '/archive' || url.pathname === '/archive/') {
-    url.pathname = '/cycletree/archive/';
-    return context.next(new Request(url, context.request));
-  }
-
   if (url.pathname === '/cycletree_portfolio' || url.pathname === '/cycletree_portfolio/') {
     return Response.redirect(`${url.origin}/`, 301);
   }

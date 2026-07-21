@@ -40,6 +40,16 @@ const copyFoundToRoot = (fromDir, toDir) => {
   }
 };
 
+const copyCycletreeArchiveToRoot = (fromDir, toDir) => {
+  const archiveDir = join(fromDir, 'archive');
+
+  if (!existsSync(archiveDir)) {
+    return;
+  }
+
+  cpSync(archiveDir, join(toDir, 'archive'), { recursive: true });
+};
+
 const writePagesRoutingFiles = (toDir) => {
   writeFileSync(
     join(toDir, '404.html'),
@@ -80,6 +90,10 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
   }
 
   copyDirContents(join(appDir, 'dist'), join(distDir, routeMap[app]));
+
+  if (app === 'cycletree_portfolio') {
+    copyCycletreeArchiveToRoot(join(appDir, 'dist'), distDir);
+  }
 }
 
 writePagesRoutingFiles(distDir);

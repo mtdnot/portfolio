@@ -32,7 +32,7 @@ const copyFoundToRoot = (fromDir, toDir) => {
   mkdirSync(toDir, { recursive: true });
 
   for (const entry of readdirSync(fromDir)) {
-    if (entry === 'index.html') {
+    if (entry === 'index.html' || entry === 'cycletree') {
       continue;
     }
 

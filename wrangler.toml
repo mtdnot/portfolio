@@ -2,8 +2,3 @@
 name = "portfolio"
 pages_build_output_dir = "./dist"
 compatibility_date = "2026-07-15"
-
-[[d1_databases]]
-binding = "portfolio_counter"
-database_name = "portfolio-counter"
-database_id = "c94d4c74-f9f3-4a59-8292-8183f938f59b"

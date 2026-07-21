@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="40" viewBox="0 0 600 40">
+  <defs>
+    <style>
+      .line { fill: none; stroke: #8b5cf6; stroke-width: 2; }
+      .node { fill: #8b5cf6; }
+    </style>
+  </defs>
+  <!-- Line 1 -->
+  <path class="line" d="M0 10 H80 L95 20 H200"/>
+  <circle class="node" cx="0" cy="10" r="4"/>
+  <circle class="node" cx="80" cy="10" r="3"/>
+  <circle class="node" cx="200" cy="20" r="5"/>
+  
+  <!-- Line 2 -->
+  <path class="line" d="M200 20 H350 L365 10 H500"/>
+  <circle class="node" cx="350" cy="20" r="3"/>
+  <circle class="node" cx="500" cy="10" r="4"/>
+  
+  <!-- Line 3 -->
+  <path class="line" d="M250 35 H400 L420 25 H550 L570 30 H600"/>
+  <circle class="node" cx="250" cy="35" r="3"/>
+  <circle class="node" cx="420" cy="25" r="4"/>
+  <circle class="node" cx="600" cy="30" r="3"/>
+</svg>

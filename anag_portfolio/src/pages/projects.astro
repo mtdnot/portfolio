@@ -1,0 +1,205 @@
+---
+import AnagInstitutionalLayout from '../layouts/AnagInstitutionalLayout.astro';
+---
+
+<AnagInstitutionalLayout title="研究プロジェクト" section="研究活動">
+    <section class="intro">
+        <p class="lead">
+            現在進行中の研究プロジェクト一覧。
+        </p>
+    </section>
+
+    <h2>Active Projects</h2>
+
+    <div class="project-list">
+        <div class="project-item" id="eps">
+            <div class="project-code">ANAG-P-001</div>
+            <div class="project-main">
+                <div class="project-name">Project EPS</div>
+                <div class="project-subtitle">Earthquake Prediction System</div>
+                <div class="project-desc">
+                    電離圏電子密度の3D時空間変動から地震前兆を検出できるか判定する研究。
+                </div>
+                <div class="project-details">
+                    <h4>目的</h4>
+                    <p>地震前兆検出の実現可能性を判定する（YES/NO/UNKNOWN）</p>
+                    
+                    <h4>アプローチ</h4>
+                    <ul>
+                        <li>FCIT（Fast Computerized Ionospheric Tomography）論文の再現実装</li>
+                        <li>GNSS-TEC → STEC → 3Dトモグラフィパイプライン</li>
+                        <li>能登半島地震ケース（2024/01/01）で検証</li>
+                        <li>事前固定・前向き評価・外乱除外が研究の核</li>
+                    </ul>
+
+                    <h4>技術パラメータ</h4>
+                    <ul>
+                        <li>α=1.2, λ=3.0e8</li>
+                        <li>ボクセル: 349,856</li>
+                        <li>観測点: 1,308</li>
+                        <li>時間刻み: 30秒</li>
+                    </ul>
+
+                    <h4>判定基準</h4>
+                    <p>前向き評価でベースライン（何もしない/ETAS等）に一貫して勝つ → YES</p>
+                    <p>限界同定 → NO</p>
+
+                    <h4>リポジトリ</h4>
+                    <ul>
+                        <li><code>eps</code>, <code>eps2</code>, <code>eps3</code></li>
+                        <li><code>eps-ionosphere</code></li>
+                        <li><code>eps-mvaX</code></li>
+                    </ul>
+
+                    <h4>担当エージェント</h4>
+                    <p><code>angis</code> (Slack #eps)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-item" id="ionosphere">
+            <div class="project-code">ANAG-P-002</div>
+            <div class="project-main">
+                <div class="project-name">電離圏観測</div>
+                <div class="project-subtitle">Ionospheric Monitoring</div>
+                <div class="project-desc">
+                    電離圏電子密度の連続観測とデータ収集。異常検知アルゴリズムの開発。
+                </div>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <div class="project-code">ANAG-P-003</div>
+            <div class="project-main">
+                <div class="project-name">データ基盤</div>
+                <div class="project-subtitle">Data Infrastructure</div>
+                <div class="project-desc">
+                    研究データの収集・保存・分析基盤の構築と運用。
+                </div>
+            </div>
+        </div>
+
+        <div class="project-item classified" id="longevity">
+            <div class="project-code">ANAG-P-000</div>
+            <div class="project-main">
+                <div class="project-name">長寿研究</div>
+                <div class="project-subtitle">Longevity Research</div>
+                <div class="project-desc classified-text">
+                    Level 5 clearance required.
+                </div>
+            </div>
+        </div>
+    </div>
+</AnagInstitutionalLayout>
+
+<style>
+    .intro {
+        margin-bottom: 24px;
+    }
+
+    .lead {
+        font-size: 15px;
+        color: var(--text-secondary);
+    }
+
+    /* Project List */
+    .project-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-item {
+        display: flex;
+        gap: 24px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .project-item:first-child {
+        padding-top: 0;
+    }
+
+    .project-item.classified {
+        opacity: 0.7;
+    }
+
+    .project-code {
+        font-size: 11px;
+        font-family: 'IBM Plex Mono', monospace;
+        color: var(--text-muted);
+        width: 100px;
+        flex-shrink: 0;
+        padding-top: 2px;
+    }
+
+    .project-main {
+        flex: 1;
+    }
+
+    .project-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 2px;
+    }
+
+    .project-subtitle {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+    }
+
+    .project-desc {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+
+    .classified-text {
+        font-style: italic;
+        color: var(--text-muted);
+    }
+
+    .project-details {
+        margin-top: 16px;
+        padding: 16px;
+        background: var(--bg-darker);
+        border-left: 2px solid var(--red);
+    }
+
+    .project-details h4 {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        margin: 16px 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .project-details h4:first-child {
+        margin-top: 0;
+    }
+
+    .project-details p {
+        font-size: 13px;
+        margin: 4px 0;
+    }
+
+    .project-details ul {
+        margin: 8px 0;
+        padding-left: 20px;
+    }
+
+    .project-details li {
+        font-size: 13px;
+        margin: 4px 0;
+    }
+
+    .project-details code {
+        font-family: 'IBM Plex Mono', monospace;
+        background: var(--bg-light);
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+</style>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60" fill="none">
+  <style>
+    .line { stroke: #8b5cf6; stroke-width: 1.5; fill: none; }
+    .node { fill: #8b5cf6; }
+    .node-ring { stroke: #8b5cf6; stroke-width: 1.5; fill: none; }
+  </style>
+  
+  <!-- Main horizontal lines -->
+  <path class="line" d="M0 30 H120 L140 15 H220" opacity="0.7"/>
+  <path class="line" d="M0 40 H80 L100 50 H180 L200 30 H300" opacity="0.6"/>
+  <path class="line" d="M0 20 H60 L80 30 H160" opacity="0.5"/>
+  
+  <!-- Secondary lines -->
+  <path class="line" d="M220 15 H320 L340 30 H400" opacity="0.5"/>
+  <path class="line" d="M300 30 L320 50 H400" opacity="0.4"/>
+  <path class="line" d="M160 30 L180 15 H260 L280 30" opacity="0.4"/>
+  
+  <!-- Nodes -->
+  <circle class="node" cx="120" cy="30" r="4" opacity="0.8"/>
+  <circle class="node" cx="200" cy="30" r="4" opacity="0.8"/>
+  <circle class="node" cx="300" cy="30" r="5" opacity="0.9"/>
+  <circle class="node-ring" cx="300" cy="30" r="9" opacity="0.5"/>
+  
+  <circle class="node" cx="140" cy="15" r="3" opacity="0.7"/>
+  <circle class="node" cx="100" cy="50" r="3" opacity="0.6"/>
+  <circle class="node" cx="180" cy="50" r="3" opacity="0.6"/>
+  <circle class="node" cx="320" cy="50" r="3" opacity="0.5"/>
+  
+  <!-- Small decorative nodes -->
+  <circle class="node" cx="60" cy="20" r="2" opacity="0.6"/>
+  <circle class="node" cx="80" cy="30" r="2" opacity="0.6"/>
+  <circle class="node" cx="340" cy="30" r="3" opacity="0.5"/>
+</svg>

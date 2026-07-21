@@ -11,6 +11,10 @@ const routeMap = {
   works_portfolio: 'works',
   'u-aizu_portfolio': 'u-aizu',
   tech_portfolio: 'tech',
+  anag_portfolio: 'anag',
+  refixa_portfolio: 'refixa',
+  mtdnot_portfolio: 'mtdnot',
+  frexida_portfolio: 'frexida',
 };
 
 const run = (command, cwd) => {
@@ -28,18 +32,6 @@ const copyDirContents = (fromDir, toDir) => {
   }
 };
 
-const copyFoundToRoot = (fromDir, toDir) => {
-  mkdirSync(toDir, { recursive: true });
-
-  for (const entry of readdirSync(fromDir)) {
-    if (entry === 'index.html' || entry === 'cycletree') {
-      continue;
-    }
-
-    cpSync(join(fromDir, entry), join(toDir, entry), { recursive: true });
-  }
-};
-
 const copyCycletreeArchiveToRoot = (fromDir, toDir) => {
   const archiveDir = join(fromDir, 'archive');
 
@@ -50,6 +42,12 @@ const copyCycletreeArchiveToRoot = (fromDir, toDir) => {
   cpSync(archiveDir, join(toDir, 'archive'), { recursive: true });
 };
 
+const copyIfExists = (fromPath, toPath) => {
+  if (existsSync(fromPath)) {
+    cpSync(fromPath, toPath, { recursive: true });
+  }
+};
+
 const writePagesRoutingFiles = (toDir) => {
   writeFileSync(
     join(toDir, '404.html'),
@@ -58,7 +56,7 @@ const writePagesRoutingFiles = (toDir) => {
 
   writeFileSync(
     join(toDir, '_redirects'),
-    '/found /404.html 404\n/found/* /404.html 404\n',
+    '',
   );
 };
 
@@ -71,7 +69,7 @@ if (existsSync(join(rootDir, 'fonts'))) {
   copyDirContents(join(rootDir, 'fonts'), join(distDir, 'works', 'fonts'));
 }
 
-for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio', 'found']) {
+for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio', 'u-aizu_portfolio', 'tech_portfolio', 'anag_portfolio', 'refixa_portfolio', 'mtdnot_portfolio', 'frexida_portfolio']) {
   const appDir = join(rootDir, app);
 
   if (!existsSync(join(appDir, 'node_modules'))) {
@@ -84,15 +82,23 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
     copyDirContents(join(appDir, 'dist'), distDir);
   }
 
-  if (app === 'found') {
-    copyFoundToRoot(join(appDir, 'dist'), distDir);
-    continue;
-  }
-
   copyDirContents(join(appDir, 'dist'), join(distDir, routeMap[app]));
 
   if (app === 'cycletree_portfolio') {
     copyCycletreeArchiveToRoot(join(appDir, 'dist'), distDir);
+  }
+
+  if (app === 'anag_portfolio') {
+    copyIfExists(join(appDir, 'dist', 'projects'), join(distDir, 'anag-projects'));
+    copyIfExists(join(appDir, 'dist', 'logs', 'anag'), join(distDir, 'logs', 'anag'));
+  }
+
+  if (app === 'mtdnot_portfolio') {
+    copyIfExists(join(appDir, 'dist', 'logs', 'mtdnot'), join(distDir, 'logs', 'mtdnot'));
+  }
+
+  if (app === 'refixa_portfolio') {
+    copyIfExists(join(appDir, 'dist', 'logs', 'refixa'), join(distDir, 'logs', 'refixa'));
   }
 }
 

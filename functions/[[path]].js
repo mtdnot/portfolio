@@ -16,12 +16,12 @@ export async function onRequest(context) {
   }
 
   if (url.pathname === '/' || url.pathname === '/index.html') {
-    url.pathname = '/__cycletree_home__/';
+    url.pathname = '/cycletree/';
     return context.next(new Request(url, context.request));
   }
 
   if (url.pathname === '/cycletree' || url.pathname === '/cycletree/') {
-    return Response.redirect(`${url.origin}/`, 301);
+    return context.next();
   }
 
   if (url.pathname === '/cycletree_portfolio' || url.pathname === '/cycletree_portfolio/') {

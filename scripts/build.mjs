@@ -40,12 +40,6 @@ const copyFoundToRoot = (fromDir, toDir) => {
   }
 };
 
-const copyFoundHomeForCycletree = (fromDir, toDir) => {
-  const cycletreeHomeDir = join(toDir, '__cycletree_home__');
-  mkdirSync(cycletreeHomeDir, { recursive: true });
-  cpSync(join(fromDir, 'index.html'), join(cycletreeHomeDir, 'index.html'));
-};
-
 const copyCycletreeArchiveToRoot = (fromDir, toDir) => {
   const archiveDir = join(fromDir, 'archive');
 
@@ -92,7 +86,6 @@ for (const app of ['cycletree_portfolio', 'personal_portfolio', 'works_portfolio
 
   if (app === 'found') {
     copyFoundToRoot(join(appDir, 'dist'), distDir);
-    copyFoundHomeForCycletree(join(appDir, 'dist'), distDir);
     continue;
   }
 

@@ -32,6 +32,10 @@ const profile = {
     label: '索(あなぐる)',
     href: 'https://blog.mtdnot.dev',
   },
+  counter: {
+    label: 'visitor counter',
+    src: 'https://blog.thris.me/counter/get/@mtdnot-personal-portfolio?theme=moebooru',
+  },
   floatingGif: {
     src: 'https://images.steamusercontent.com/ugc/959733232046536804/EB2DA2DA300F1CCCBA2AB6A59447F2B3E24B620A/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false',
     alt: 'decorative animated image',
@@ -168,6 +172,13 @@ const profile = {
                 <ul>
                   <li><a href={profile.blog.href} target="_blank" rel="noreferrer">{profile.blog.label}</a></li>
                 </ul>
+              </div>
+
+              <div class="section">
+                <h2># Counter</h2>
+                <div class="counter-panel">
+                  <img src={profile.counter.src} alt={profile.counter.label} loading="lazy" />
+                </div>
               </div>
             </div>
           </div>
@@ -490,6 +501,22 @@ const profile = {
 
   li {
     line-height: 1.8;
+  }
+
+  .counter-panel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 40px;
+    padding-top: 0.15rem;
+  }
+
+  .counter-panel img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
   }
 
   @keyframes cloud-strip-loop {

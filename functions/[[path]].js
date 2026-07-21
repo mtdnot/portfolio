@@ -15,6 +15,15 @@ export async function onRequest(context) {
     return new Response('Not Found', { status: 404 });
   }
 
+  if (url.pathname === '/' || url.pathname === '/index.html') {
+    url.pathname = '/__cycletree_home__/';
+    return context.next(new Request(url, context.request));
+  }
+
+  if (url.pathname === '/cycletree' || url.pathname === '/cycletree/') {
+    return Response.redirect(`${url.origin}/`, 301);
+  }
+
   if (url.pathname === '/cycletree_portfolio' || url.pathname === '/cycletree_portfolio/') {
     return Response.redirect(`${url.origin}/`, 301);
   }

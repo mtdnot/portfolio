@@ -6,6 +6,7 @@ export const identityLinks = [
 
 export const externalLinks = [
   { label: 'Wiki', href: 'https://wiki.cycletree.org' },
+  { label: 'Scrapbox', href: 'https://scrapbox.io/cycletree/' },
   { label: 'Existree (mtdnot.dev)', href: 'https://mtdnot.dev' },
 ] as const;
 
